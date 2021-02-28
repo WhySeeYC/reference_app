@@ -218,4 +218,50 @@ root.iconbitmap("/Users/yi-chunwang/OneDrive - Perspectum Diagnostics Ltd/Paligo
 my_img = ImageTk.PhotoImage(Image.open("/Users/yi-chunwang/OneDrive - Perspectum Diagnostics Ltd/Employment/burger.PNG"))
 my_label = Label(image = my_img)
 my_label.pack()
+
+root.mainloop()
+
 #pip3 install is a bash command not a python command
+
+#create a image viewer app
+from tkinter import *
+from PIL import ImageTk, Image
+
+root = Tk()
+root.title("Adding image")
+root.iconbitmap("/Users/yi-chunwang/OneDrive - Perspectum Diagnostics Ltd/Paligo/Images/FDA.png")
+
+my_img1 = ImageTk.PhotoImage(Image.open("/Users/yi-chunwang/OneDrive - Perspectum Diagnostics Ltd/Employment/burger.png")) #the image is too big
+my_img2 = ImageTk.PhotoImage(Image.open("/Users/yi-chunwang/OneDrive - Perspectum Diagnostics Ltd/Paligo/Images/LQ_Phantom_Example.png")) 
+my_img3 = ImageTk.PhotoImage(Image.open("/Users/yi-chunwang/OneDrive - Perspectum Diagnostics Ltd/Paligo/Images/Calimatrix 3 Plane Localiser Volume shim box .png"))
+my_img4 = ImageTk.PhotoImage(Image.open("/Users/yi-chunwang/OneDrive - Perspectum Diagnostics Ltd/Paligo/Images/3D T1-weighted VIBE.png"))
+my_img5 = ImageTk.PhotoImage(Image.open("/Users/yi-chunwang/OneDrive - Perspectum Diagnostics Ltd/Paligo/Images/3D T1 VIBE Generic.png"))
+
+image_list = [my_img1, my_img2, my_img3, my_img4, my_img5]
+
+my_label = Label(image = my_img1)
+my_label.grid(row = 0, column =0, columnspan=3)
+
+def forward(image_number):
+    global my_label
+    global forward
+    global back
+
+    my_label.grid_forget() #Before showing the next image, we need to delete the existing image 
+
+
+def back():
+    return
+
+
+button_back = Button(root, text = "back", command = lambda:back)
+button_exit = Button(root, text = "exit", command = root.quit)
+button_forward = Button(root, text = "forward", command = lambda:forward(2)) #if we want to pass the number back to the defined function, use lambda
+
+button_back.grid(row = 1, column =0)
+button_exit.grid(row = 1, column =1)
+button_forward.grid(row = 1, column =2)
+
+root.mainloop()
+
+#1:38

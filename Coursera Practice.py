@@ -415,8 +415,6 @@ print("There were", count, "lines in the file with From as the first word")
 # After the dictionary is produced, the program reads through the dictionary using a maximum loop to find the most prolific committer.
 
 name = input("Enter file:")
-
-
 file = open("/Users/yi-chunwang/OneDrive - Perspectum Diagnostics Ltd/Python/mbox-short.txt")
 counts = dict()
 persons = []

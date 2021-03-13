@@ -427,6 +427,19 @@ for line in file:
 for who in persons:
     counts[who] = counts.get(who,0)+1
 
+# --- it can also be ----
+counts  = dict()
+payment_type = ["Salary", "BackPay", "Bonus"]
+for payment in payment_type:
+    if payment not in counts:
+        counts[payment] = 1
+    else:
+        counts[payment] = counts[payment]+1
+
+
+
+# ---- econtinue----        
+print(counts)
 whos_max = ""
 current_max = 0
 for who,count in counts.items():
@@ -437,4 +450,50 @@ for who,count in counts.items():
         continue
 print(whos_max, current_max)
 
-#28 Feb
+#13 March
+House = {"Tom":31, "Connor":28, "Luca":32, "Aline":25, "YC":25}
+emptylist = list()
+for k,v in House.items():
+		emptylist.append( (v,k) )  #The (v,k) is then the value and key now
+age_order = sorted(emptylist, reverse = True)
+print(age_order)
+
+people = House.items()
+people
+x,y = 3,4
+y
+
+#Write a program to read through the mbox-short.txt and figure out the distribution by hour of the day for each of the messages. You can pull the hour out from the 'From ' line by finding the time and then splitting the string a second time using a colon. Once you have accumulated the counts for each hour, print out the counts, sorted by hour as shown below.
+
+file = open("/Users/yi-chunwang/OneDrive - Perspectum Diagnostics Ltd/Python/mbox-short.txt")
+
+hour_list = []
+distribution = {}
+hour_distribution = []
+
+for line in file:
+    if line.startswith("From ") is True:
+        split_line = line.split()
+        extract_time = split_line[5]
+        split_time = extract_time.split(":")
+        get_hour = split_time[0]
+        hour_list.append(get_hour)
+    else:continue
+
+for get_hour in hour_list:
+    if get_hour not in distribution:
+        distribution[get_hour] = 1
+    else:
+        distribution[get_hour] = distribution[get_hour] + 1   
+
+for k, v in distribution.items():
+    hour_distribution.append((k,v))
+
+results = sorted(hour_distribution)
+results
+
+for ( a,b ) in results:
+    print(a,b)
+
+
+

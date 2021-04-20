@@ -5,8 +5,6 @@ import pandas as pd
 
 # Read csv file as pandas DataFrame
 
-file = input("Enter your file:")
-
 def SpendOrg(file):
     f1 = pd.read_csv(file)
     # Change column 1 name to the Out, column 2 name to In. Assign it to f2
@@ -15,20 +13,29 @@ def SpendOrg(file):
     f3 = abs(f2.groupby('category').sum())
     f4 = f3.iloc[0:, 0:1].transpose()
     f4['Month'] = f2.Date[0].split('-')[1]
-    print(f4)
+    f4
 
+file = input("Enter your file:")
 SpendOrg(file)
 
 
 
-
-
 # Test Concatenate to payslip dataframe ----------------------------
-# file2 = '/Users/YC/Work_Repo/fYnanCe/CollectPayslip.csv'
-# f6 = pd.read_csv(file2)
-# Money = pd.concat([f6,f5], axis = 1)
-# Money.info()
-#file = '/Users/YC/Work_Repo/fYnanCe/DemoMonzoExtract.csv'
+file2 = '/Users/YC/Work_Repo/fYnanCe/CollectPayslip.csv'
+f5 = pd.read_csv(file2)
+f5.head()
+Month = []
+for i in range(len(f5['Pay_Date'])):
+    Month.append(f5['Pay_Date'][i].split('-')[1])
+f5['Month'] = Month
+f5
+
+# merge on the identical column: Month 
+Money = f5.merge(f4, on = 'Month', how = 'outer')
+Money.info()
+Money.head()
+
+file = '/Users/YC/Work_Repo/fYnanCe/DemoMonzoExtract.csv'
 
 
 

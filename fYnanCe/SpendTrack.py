@@ -3,41 +3,36 @@
 # Import necessary libraries
 import pandas as pd
 
-# Read csv file as pandas DataFrame
-
-def SpendOrg(file):
-    f1 = pd.read_csv(file)
-    # Change column 1 name to the Out, column 2 name to In. Assign it to f2
+# SpendingTrack function
+def SpendOrg():
+    file1 = input('Enter your Expense:')
+    f1 = pd.read_csv(file1)
     f2 = f1.rename(columns = {'amount out ': 'Out', 'amount in': 'In'})
-    # Work out how much each category is in total and return in absolute value
     f3 = abs(f2.groupby('category').sum())
-    f4 = f3.iloc[0:, 0:1].transpose()
-    f4['Month'] = f2.Date[0].split('-')[1]
-    return f4 # In Python, functions return None by default if they come to the end of themselves without returning.
+    Expensefile = f3.iloc[0:, 0:1].transpose()
+    Expensefile['Month'] = f2.Date[0].split('-')[1]
+    global f4 # define global variable because at MergeSheet function will call it
+    f4 = Expensefile
 
-file = input("Enter your file:")
-temp = SpendOrg(file)
-temp
+# Create the same hook -> Month at the payslip file
+def PayOrg():
+    file2 = input('Enter your Payfile:')
+    Payfile = pd.read_csv(file2)
+    Month = []
+    for i in range(len(Payfile['Pay_Date'])):
+        Month.append(Payfile['Pay_Date'][i].split('-')[1])
+    Payfile['Month'] = Month
+    global f5
+    f5 = Payfile
 
+# Concatenate dataframes ----------------------------
+def MergeSheet():
+    SpendOrg()
+    PayOrg()
+    Moneyflow = f5.merge(f4, on = 'Month', how = 'outer') #Outer Join or Full outer join:To keep all rows from both data frames
+    return Moneyflow.info()
 
+MergeSheet()
 
-# Test Concatenate to payslip dataframe ----------------------------
-file2 = '/Users/YC/Work_Repo/fYnanCe/CollectPayslip.csv'
-f5 = pd.read_csv(file2)
-f5.head()
-Month = []
-for i in range(len(f5['Pay_Date'])):
-    Month.append(f5['Pay_Date'][i].split('-')[1])
-f5['Month'] = Month
-f5
-
-# merge on the identical column: Month 
-# Outer Join or Full outer join:To keep all rows from both data frames
-Money = f5.merge(f4, on = 'Month', how = 'outer')
-Money.info()
-Money.head()
-
-file = '/Users/YC/Work_Repo/fYnanCe/DemoMonzoExtract.csv'
-
-
-
+#Expensefile = '/Users/YC/Work_Repo/fYnanCe/DemoMonzoExtract.csv'
+#Payfile = '/Users/YC/Work_Repo/fYnanCe/CollectPayslip.csv'

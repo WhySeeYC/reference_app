@@ -2,6 +2,52 @@
 
 # Import necessary libraries
 import pandas as pd
+import pdfplumber
+import re
+import unicodedata
+from collections import namedtuple
+
+def PayslipInfo():
+    file3 = input("Select your payslip file:")
+    with pdfplumber.open(file3) as pdf:
+        holder = []
+        extractText = pdf.pages[0].extract_text()
+        PT2 = unicodedata.normalize("NFKD", extractText)
+        PT3 = PT2.replace("\xad", "")
+
+    employ_re = re.compile(r"(SO\S\d+)(.*)(Perspectum*)")
+    PayDate_re = re.compile(r"(Date: )(\d{2}/\d{2}/\d{4})")
+    Salary_re = re.compile(r"(Salary)(\s)(\d+.\d+)")
+    Tax_re = re.compile(r"(Tax)(\s)(\d+.\d+)")
+    NI_re = re.compile(r"(National Insurance)(\s)(\d+\d+)")
+    ErsNICTP_re = re.compile(r"(Ers NIC TP:)(\d+.\d+)")    
+    ErsNICYTD_re = re.compile(r"(Ers NIC YTD:)(\s)(\d+.\d+)")
+    ErsPensionTP_re = re.compile(r"(Ers Pension TP:)(\s)(\d+.\d+)")
+    ErsPensionYTD_re = re.compile(r"(Ers Pension YTD:)(\s)(\d+.\d+)")
+    
+    Line = namedtuple("Employment","Employee_ID,Employee_Name, Company_Name, Pay_Date, Salary,Tax, National_Insurance, Ers_NIC_TP, Ers_NIC_YTD,Ers_Pension_TP, Ers_Pension_YTD")
+    Employee_ID = employ_re.search(PT3).group(1)
+    Employee_Name = employ_re.search(PT3).group(2)
+    Company_Name = employ_re.search(PT3).group(3)
+    Pay_Date = PayDate_re.search(PT3).group(2)
+    Salary = Salary_re.search(PT3).group(3)
+    Tax = Tax_re.search(PT3).group(3)
+    National_Insurance = NI_re.search(PT3).group(3)
+    Ers_NIC_TP = ErsNICTP_re.search(PT3).group(2)
+    Ers_NIC_YTD = ErsNICYTD_re.search(PT3).group(3)
+    Ers_Pension_TP = ErsPensionTP_re.search(PT3).group(3)
+    Ers_Pension_YTD = ErsPensionYTD_re.search(PT3).group(3)
+
+    holder.append(Line(Employee_ID, Employee_Name,Company_Name, Pay_Date, Salary, Tax,National_Insurance, Ers_NIC_TP, Ers_NIC_YTD,Ers_Pension_TP, Ers_Pension_YTD))
+
+    df = pd.DataFrame(holder)
+    df["Pay_Date"] = pd.to_datetime(df["Pay_Date"])
+    for col in df.columns[4:]:  
+        df[col] = pd.to_numeric(df[col], errors="ignore")     
+    global f6
+    f6 = df
+
+PayslipInfo()
 
 # SpendingTrack function
 def SpendOrg():
@@ -33,6 +79,7 @@ def MergeSheet():
     return Moneyflow.info()
 
 MergeSheet()
+# Start creating Gui for this
 
 #Expensefile = '/Users/YC/Work_Repo/fYnanCe/DemoMonzoExtract.csv'
 #Payfile = '/Users/YC/Work_Repo/fYnanCe/CollectPayslip.csv'

@@ -92,13 +92,14 @@ def MergeSheet():
 def AddToMerge():
     df1 = pd.read_csv(r'/Users/YC/Work_Repo/fYnanCe/Finance Merged Result.csv')
     df2 = pd.concat([df1, Moneyflow])
-    df2.to_csv('Finance Merged Result.csv')
+    return df2.info()
+    df2.to_csv('Finance Merged Result.csv', index = False)
 
 
 MergeSheet()
 AddToMerge()
 
-
+df1.info()
 # Start creating Gui for this
 
 #Expensefile = '/Users/YC/Work_Repo/fYnanCe/DemoMonzoExtract.csv'

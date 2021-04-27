@@ -7,6 +7,7 @@ import re
 import unicodedata
 from collections import namedtuple
 
+# Extract information needed from payslip
 def PayslipInfo():
     file3 = input("Select your payslip file:")
     with pdfplumber.open(file3) as pdf:
@@ -38,16 +39,23 @@ def PayslipInfo():
     Ers_Pension_TP = ErsPensionTP_re.search(PT3).group(3)
     Ers_Pension_YTD = ErsPensionYTD_re.search(PT3).group(3)
 
-    holder.append(Line(Employee_ID, Employee_Name,Company_Name, Pay_Date, Salary, Tax,National_Insurance, Ers_NIC_TP, Ers_NIC_YTD,Ers_Pension_TP, Ers_Pension_YTD))
+    holder.append(Line(Employee_ID, Employee_Name, Company_Name, Pay_Date, Salary, Tax,National_Insurance, Ers_NIC_TP, Ers_NIC_YTD,Ers_Pension_TP, Ers_Pension_YTD))
 
     df = pd.DataFrame(holder)
-    df["Pay_Date"] = pd.to_datetime(df["Pay_Date"])
+
+    # df["Pay_Date"] = pd.to_datetime(df["Pay_Date"])
+    
     for col in df.columns[4:]:  
         df[col] = pd.to_numeric(df[col], errors="ignore")     
-    global f6
-    f6 = df
 
-PayslipInfo()
+    # Add organising function
+    Month = []
+    Month.append(df['Pay_Date'][0].split('/')[1])
+    df['Month'] = Month
+    
+    global f5
+    f5 = df
+
 
 # SpendingTrack function
 def SpendOrg():
@@ -73,12 +81,14 @@ def PayOrg():
 
 # Concatenate dataframes ----------------------------
 def MergeSheet():
+    PayslipInfo()
     SpendOrg()
-    PayOrg()
-    Moneyflow = f5.merge(f4, on = 'Month', how = 'outer') #Outer Join or Full outer join:To keep all rows from both data frames
+    Moneyflow = f5.merge(f4, on = 'Month', how = 'outer') #Outer Join or Full outer join:To keep all rows from both data frames. 
+    # If to each month create spreadsheet, that will be same months but if the payfile and expanse file are in different month, the data frame will not make sense.
     return Moneyflow.info()
 
 MergeSheet()
+
 # Start creating Gui for this
 
 #Expensefile = '/Users/YC/Work_Repo/fYnanCe/DemoMonzoExtract.csv'

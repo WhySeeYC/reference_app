@@ -83,11 +83,21 @@ def PayOrg():
 def MergeSheet():
     PayslipInfo()
     SpendOrg()
+    global Moneyflow
     Moneyflow = f5.merge(f4, on = 'Month', how = 'outer') #Outer Join or Full outer join:To keep all rows from both data frames. 
     # If to each month create spreadsheet, that will be same months but if the payfile and expanse file are in different month, the data frame will not make sense.
     return Moneyflow.info()
 
+# Update target csv file 
+def AddToMerge():
+    df1 = pd.read_csv(r'/Users/YC/Work_Repo/fYnanCe/Finance Merged Result.csv')
+    df2 = pd.concat([df1, Moneyflow])
+    df2.to_csv('Finance Merged Result.csv')
+
+
 MergeSheet()
+AddToMerge()
+
 
 # Start creating Gui for this
 

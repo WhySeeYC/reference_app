@@ -1,6 +1,11 @@
 {
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
-    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.8/bin/python3",
-    "terminal.integrated.inheritEnv": false
+    "python.pythonPath": "/usr/local/bin/python3",
+    "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.fontFamily": "Monospace",
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
 }

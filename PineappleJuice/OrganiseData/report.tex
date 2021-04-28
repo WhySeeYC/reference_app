@@ -1,0 +1,107 @@
+% Author: Perspectum Diagnostics
+% Date:  08-Feb-2021 17:05:15
+
+% This file was created by Liver MultiScan
+% 
+\documentclass{article}
+\usepackage[top=5cm, bottom=3cm, outer=2.0cm, inner=2.0cm, headsep=0cm, headheight=4.5cm]{geometry} 
+\usepackage[pages=all]{background}
+\usepackage[default,scale=1]{opensans}
+\usepackage[english]{babel}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{colortbl}
+\usepackage{adjustbox}
+\usepackage{multirow}
+\usepackage{lastpage}
+\usepackage{longtable}
+\usepackage[space]{grffile}
+\usepackage[superscript]{cite}
+\renewcommand{\headrulewidth}{0pt}
+\definecolor{PDpink}{rgb}{0.8906, 0.1914, 0.4492}
+\definecolor{PDblue}{rgb}{0.1797, 0.6289, 0.8672}
+\definecolor{PDgrey}{rgb}{0.8984, 0.8984, 0.8984}
+\backgroundsetup{
+scale=1,
+color=black,
+opacity=1,
+angle=0,
+contents={%
+  \includegraphics[width=\paperwidth,height=\paperheight]{images/dotted-background.png}
+  }%
+}
+\chead{}
+\cfoot{}
+\rhead{}
+\fancyfoot[L]{
+\noindent\includegraphics[width = \textwidth]{images/PDbar.png} \\
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lr}
+Page \thepage \normalfont{ of} \pageref{LastPage} & Analysed with LiverMultiScan Discover 
+5-Dev
+\end{tabular*}
+}
+\fancyhead[L]{
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{0.3\linewidth} p{0.8\linewidth}@{}}
+ \multirow{2}{*}{ \noindent\includegraphics[width = 0.3\textwidth]{images/PD_logo_with_R.png}}
+ & \multicolumn{1}{r}{
+ANON
+} \\
+ & \multicolumn{1}{r}{
+QC: 20210208:SL2
+} \\       \\
+ \end{tabular*} \\
+\noindent\includegraphics[width = \textwidth]{images/PDbar.png}
+\noindent\colorbox{PDgrey}{
+\begin{tabular*}{0.977\textwidth}{@{\extracolsep{\fill}}p{0.15\textwidth} p{0.3\textwidth} p{0.2\textwidth} p{0.25\textwidth}@{}}
+Patient name: & ANON & Scan date: & 18-Aug-2018 \\Patient ID: & ANON & Referring physician: & N/A \\\end{tabular*}} \\\vspace*{0.1cm}\textbf{\color{PDpink}This report was generated with research software and is not for clinical use.} \\}\begin{document}
+
+\noindent Metrics are displayed as median with interquartile range (IQR) and are calculated from multiple regions of interest or  whole liver regions of interest. The slices below are examples from the acquisition. Slices are shown on subsequent  pages, with more detailed analysis. \\ \\ 
+\color{white}\begin{center}
+\begin{tabular*}{0.975\textwidth}{@{\extracolsep{\fill}}p{0.305\textwidth} p{0.305\textwidth} p{0.305\textwidth}@{}}
+\rowcolor{PDblue}
+\centering \textbf{\\cT1 (ms)}  \\ Median: \textbf{647 ms} \\ IQR: 623 - 684 ms \\ Ref interval\cite{standardisedcT1NormalRange}: 633 - 794 ms \\ 
+&
+\centering \textbf{\\Iron (mg/g dry liver)}  \\ Median: \textbf{1.2 mg/g} \\ IQR: 1.1 - 1.2 mg/g \\ Normal\cite{ironNormalRange}: <1.8 mg/g \\ 
+&
+\centering \textbf{\\PDFF (\%)}  \\ Median: \textbf{2.8 \%} \\ IQR: 1.8 - 3.8 \% \\ Normal:\cite{fatNormalRange} < 5.6 \% \\ 
+\end{tabular*} \\
+\color{black}
+\vspace*{2cm}
+\begin{tabular}{c c c c c c }
+\multicolumn{1}{l}{Series 5,6} & 
+\multicolumn{1}{r}{Slice 1/1} 
+& 
+\multicolumn{1}{l}{Series 3} & 
+\multicolumn{1}{r}{Slice 1/1} 
+& 
+\multicolumn{1}{l}{Series 8,9} & 
+\multicolumn{1}{r}{Slice 2/5} 
+\\ 
+\multicolumn{2}{c}{\includegraphics[height = 0.296\textheight]{/Volumes/Image Analysis/Joao/pineapple_results/pre_PJ/EXP010clfrcft-10656/Report_folder/images/cT1Summary.png}}
+& 
+\multicolumn{2}{c}{\includegraphics[height = 0.296\textheight]{/Volumes/Image Analysis/Joao/pineapple_results/pre_PJ/EXP010clfrcft-10656/Report_folder/images/t2sSummary.png}}
+& 
+\multicolumn{2}{c}{\includegraphics[height = 0.296\textheight]{/Volumes/Image Analysis/Joao/pineapple_results/pre_PJ/EXP010clfrcft-10656/Report_folder/images/pdffSummary.png}}
+\\ 
+\multicolumn{2}{c}{cT1 (ms)}
+& 
+\multicolumn{2}{c}{T2* (ms)}
+& 
+\multicolumn{2}{c}{PDFF (\%)}
+\\ 
+\end{tabular}
+\end{center}
+\newpage \noindent \color{black}Metrics are displayed as median with interquartile range. They are calculated from whole liver region of interest  (overlaid in colour on the image). Calculated metrics are shown against a reference normal range. \\ \\\color{white}\noindent\hspace*{0.2cm}\begin{tabular*}{0.975\textwidth}{@{\extracolsep{\fill}}p{0.305\textwidth} | p{0.64\textwidth}@{}}    \rowcolor{PDblue}    \raggedright    \rule{0pt}{2ex}    \textbf{cT1 (corrected T1)} \\ \textbf{\\ Median:} 647 ms \\ \textbf{IQR:} 623 - 684 ms \\ \textbf{Ref interval\cite{standardisedcT1NormalRange}:} 633 - 794 ms &     \raggedright \textbf{\\ \textbf{\\} Series:} 5,6 \\ \textbf{Slice:} 1  of 1 \\ \textbf{T1 image quality:} Satisfactory    \rule[-1.2ex]{0pt}{0pt}\end{tabular*}\color{black}\begin{center}\vspace*{0.3cm}\includegraphics[width = 0.4\textwidth]{/Volumes/Image Analysis/Joao/pineapple_results/pre_PJ/EXP010clfrcft-10656/Report_folder/images/cT1_slice_1.png} \\\vspace*{0.3cm}\noindent\hspace*{0.2cm}\begin{tabular*}{0.975\textwidth}{@{\extracolsep{\fill}}p{0.5\textwidth} p{0.5\textwidth}@{}}Histogram of segmented area \newline \includegraphics[width = 0.48\textwidth]{/Volumes/Image Analysis/Joao/pineapple_results/pre_PJ/EXP010clfrcft-10656/Report_folder/images/cT1_histogram_slice_1.png} & Representation of cT1 classes within the liver \newline \newline \hspace*{1cm} \includegraphics[height = 0.3\textheight]{/Volumes/Image Analysis/Joao/pineapple_results/pre_PJ/EXP010clfrcft-10656/Report_folder/images/cT1_pie_slice_1.png} \end{tabular*}\end{center}
+\newpage \noindent \color{black}Metrics are displayed as median with interquartile range They are calculated from a whole liver region of  interest (contour overlaid on the image). Calculated metrics are shown against a reference normal range. \\ \\\color{white}\noindent\hspace*{0.2cm}\begin{tabular*}{0.975\textwidth}{@{\extracolsep{\fill}}p{0.305\textwidth} | p{0.64\textwidth}@{}}    \rowcolor{PDblue}    \raggedright    \rule{0pt}{2ex}    \textbf{PDFF (\%)} \\ \textbf{\\ Median:} 2.8 \% \\ \textbf{IQR:} 1.8 - 3.8 \% \\ \textbf{Normal:\cite{fatNormalRange}} < 5.6 \% &     \raggedright \textbf{\\ \textbf{\\} Series:} 8,9 \\ \textbf{Slice:} 2  of 5 \\ \textbf{PDFF image quality:} Satisfactory    \rule[-1.2ex]{0pt}{0pt}\end{tabular*}\color{black}\begin{center}\vspace*{0.3cm}\includegraphics[width = 0.4\textwidth]{/Volumes/Image Analysis/Joao/pineapple_results/pre_PJ/EXP010clfrcft-10656/Report_folder/images/PDFF_slice_3.png} \\\vspace*{0.3cm}\noindent\hspace*{0.2cm}\begin{tabular*}{0.975\textwidth}{@{\extracolsep{\fill}}p{0.5\textwidth} p{0.5\textwidth}@{}}Histogram of segmented area \newline \includegraphics[width = 0.48\textwidth]{/Volumes/Image Analysis/Joao/pineapple_results/pre_PJ/EXP010clfrcft-10656/Report_folder/images/PDFF_histogram_slice_3.png} & Representation of PDFF classes within the liver \newline \newline \hspace*{1.5cm} \includegraphics[height = 0.3\textheight]{/Volumes/Image Analysis/Joao/pineapple_results/pre_PJ/EXP010clfrcft-10656/Report_folder/images/PDFF_pie_slice_3.png} \end{tabular*}\end{center}
+\newpage \noindent \color{black}Metrics are displayed as median with interquartile range. They are calculated from one or more regions of interest  (circles overlaid on the images). Calculated metrics are shown against a reference normal range. \\ \\\color{white}\noindent\hspace*{0.2cm}\begin{tabular*}{0.975\textwidth}{@{\extracolsep{\fill}}p{0.305\textwidth} | p{0.64\textwidth}@{}}    \rowcolor{PDblue}    \raggedright    \rule{0pt}{2ex}    \textbf{Iron (mg/g dry weight liver)} \\ \textbf{\\ Median:} 1.2 mg/g \\ \textbf{IQR:} 1.1 - 1.2 mg/g \\ \textbf{Normal:\cite{ironNormalRange}} < 1.8 mg/g &     \raggedright \textbf{\\ \textbf{\\} Series:} 3 \\ \textbf{Slice:} 1  of 1 \\ \textbf{T2* image quality:} Suboptimal but quantifiable. auto: Evidence of motion    \rule[-1.2ex]{0pt}{0pt}\end{tabular*}\color{black}\begin{center}\vspace*{0.3cm}\includegraphics[width = 0.6\textwidth]{/Volumes/Image Analysis/Joao/pineapple_results/pre_PJ/EXP010clfrcft-10656/Report_folder/images/t2s_ROI_slice_1.png} \\\end{center}
+\newpage\backgroundsetup{opacity=0.1, contents={  \includegraphics[width=\paperwidth,height=\paperheight]{images/colour-background.png}  } }\BgThispage
+\vspace*{1.5cm}
+\noindent\textbf{Acquisition Information \\ \\}\colorbox{PDblue}{\color{white}\begin{tabular*}{0.97\linewidth}{@{\extracolsep{\fill}}p{0.9\linewidth}@{}}Date analysed: February 08 2021 17:05 \\Scanner: SIEMENS Prisma 3T \\Scanner software: syngo MR E11 \\Scanner serial: 166021\end{tabular*}} \\\color{black}\vspace*{1.5cm} \\\noindent\textbf{References}\renewcommand{\section}[2]{}\begin{thebibliography}{9}
+\bibitem{standardisedcT1NormalRange}Reference interval from 95\% confidence interval on cT1 distribution in healthy subjects with BMI < 25 kg/m.
+\bibitem{ironNormalRange}Nuttall et al, Ann Clin Lab Sci. 2003;33(4):443-50 Reference Limits for Copper and Iron in Liver Biopsies
+\bibitem{fatNormalRange}Szczepaniak et al, Am J Physiol Endocrinol Metab. 2005; 288(2):E462-8 Magnetic resonance spectroscopy to measure hepatic triglyceride content: prevalence of hepatic steatosis in the general population\end{thebibliography}
+
+\end{document}

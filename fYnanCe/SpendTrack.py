@@ -62,45 +62,31 @@ def SpendOrg():
     file1 = input('Enter your Expense:')
     f1 = pd.read_csv(file1)
     f2 = f1.rename(columns = {'amount out ': 'Out', 'amount in': 'In'})
-    f3 = abs(f2.groupby('category').sum())
+    f3 = abs(f2.groupby('Category').sum())
     Expensefile = f3.iloc[0:, 0:1].transpose()
-    Expensefile['Month'] = f2.Date[0].split('-')[1]
+    Expensefile['Month'] = f2.Date[0].split('/')[1]
     global f4 # define global variable because at MergeSheet function will call it
     f4 = Expensefile
-
-# Create the same hook -> Month at the payslip file
-def PayOrg():
-    file2 = input('Enter your Payfile:')
-    Payfile = pd.read_csv(file2)
-    Month = []
-    for i in range(len(Payfile['Pay_Date'])):
-        Month.append(Payfile['Pay_Date'][i].split('-')[1])
-    Payfile['Month'] = Month
-    global f5
-    f5 = Payfile
 
 # Concatenate dataframes ----------------------------
 def MergeSheet():
     PayslipInfo()
     SpendOrg()
     global Moneyflow
-    Moneyflow = f5.merge(f4, on = 'Month', how = 'outer') #Outer Join or Full outer join:To keep all rows from both data frames. 
-    # If to each month create spreadsheet, that will be same months but if the payfile and expanse file are in different month, the data frame will not make sense.
+    Moneyflow = f5.merge(f4, on = 'Month', how = 'outer') 
     return Moneyflow.info()
 
-# Update target csv file 
+# Update target csv file
 def AddToMerge():
     df1 = pd.read_csv(r'/Users/YC/Work_Repo/fYnanCe/Finance Merged Result.csv')
-    df2 = pd.concat([df1, Moneyflow])
-    return df2.info()
+    df2 = pd.concat([df1, Moneyflow], axis = 0)
     df2.to_csv('Finance Merged Result.csv', index = False)
+    return df2.info()
 
 
 MergeSheet()
 AddToMerge()
 
-df1.info()
+
 # Start creating Gui for this
 
-#Expensefile = '/Users/YC/Work_Repo/fYnanCe/DemoMonzoExtract.csv'
-#Payfile = '/Users/YC/Work_Repo/fYnanCe/CollectPayslip.csv'

@@ -55,11 +55,11 @@ def MergeSheet():
     MergeLabel = Label(root, text = Moneyflow.info()).pack()
 
 
-root = Tk() # main GUI window
-root.title('Time to manage your finance') # this is a widget
+root = Tk() 
+root.title('Time to manage your finance') 
 
 
-payButton = Button(root, text = 'Select payslip file', command = openPay) # we want the button in the main root
+payButton = Button(root, text = 'Select payslip file', command = openPay) 
 payButton.pack()
 
 payInfoButton = Button(root, text = 'Get payslip info', command = PayslipInfo)
@@ -75,6 +75,11 @@ exit_button = Button(root, text = 'Exit App', command = root.destroy)
 exit_button.pack()
 
 root.mainloop()
+
+
+
+
+
 
 
 #pop up a window show the merged csv

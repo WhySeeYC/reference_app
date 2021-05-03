@@ -6,6 +6,8 @@ import pdfplumber
 import re
 import unicodedata
 from collections import namedtuple
+from tkinter import *
+import matplotlib.pyplot as plt
 
 # Extract information needed from payslip
 def PayslipInfo():
@@ -88,5 +90,12 @@ MergeSheet()
 AddToMerge()
 
 
-# Start creating Gui for this
+# Start creating Gui for this, please see file fYnanCeApp.py
+root = Tk()
+payslipLabel = Label(root, text = 'Enter your payslip file')
+payslipLabel.pack()
+
+root.mainloop()
+
+# Consider adding rent and bill records from another bank
 

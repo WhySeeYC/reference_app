@@ -9,8 +9,6 @@ import re
 from tkinter import *
 from tkinter import filedialog
 
-
-
 def openPay():
     root.filename = filedialog.askopenfilename(initialdir = '/Users/YC/Work_Repo/fYnanCe', title = 'Select A File', filetypes = (('csv files', '*.csv'), ('pdf files', '*.pdf'), ('all files', '*.*')))
     global payfile
@@ -33,23 +31,13 @@ def PayslipInfo():
     ErsPensionTP_re = re.compile(r"(Ers Pension TP:)(\s)(\d+.\d+)")
     ErsPensionYTD_re = re.compile(r"(Ers Pension YTD:)(\s)(\d+.\d+)")
 
-    Employee_ID = employ_re.search(PT3).group(1)
-    Employee_Name = employ_re.search(PT3).group(2)
-    Company_Name = employ_re.search(PT3).group(3)
-    Pay_Date = PayDate_re.search(PT3).group(2)
-    Salary = Salary_re.search(PT3).group(3)
-    Tax = Tax_re.search(PT3).group(3)
-    National_Insurance = NI_re.search(PT3).group(3)
-    Ers_NIC_TP = ErsNICTP_re.search(PT3).group(2)
-    Ers_NIC_YTD = ErsNICYTD_re.search(PT3).group(3)
-    Ers_Pension_TP = ErsPensionTP_re.search(PT3).group(3)
-    Ers_Pension_YTD = ErsPensionYTD_re.search(PT3).group(3)
+    holder = {'Employee_ID' : [employ_re.search(PT3).group(1)], 'Employee_Name' : [employ_re.search(PT3).group(2)], 'Company_Name' : [employ_re.search(PT3).group(3)], 'Pay_Date' : [PayDate_re.search(PT3).group(2)], 'Salary' : [Salary_re.search(PT3).group(3)], 'Tax' : [Tax_re.search(PT3).group(3)], 'National_Insurance' : [NI_re.search(PT3).group(3)], 'Ers_NIC_TP' : [ErsNICTP_re.search(PT3).group(2)], 'Ers_NIC_YTD' : [ErsNICYTD_re.search(PT3).group(3)], 'Ers_Pension_TP' : [ErsPensionTP_re.search(PT3).group(3)], 'Ers_Pension_YTD' : [ErsPensionYTD_re.search(PT3).group(3)]}
     
-    holder = {'Employee ID': Employee_ID, 'Employee Name': Employee_Name, 'Company Name': Company_Name, 'Pay Date': Pay_Date, 'Salary': Salary, 'Tax': Tax, 'National Insurance': National_Insurance, 'Ers NIC TP': Ers_NIC_TP, 'Ers NIC YTD': Ers_NIC_YTD, 'Ers Pension TP': Ers_Pension_TP, 'Ers Pension YTD': Ers_Pension_YTD}
-    holder['Month']  = holder['Pay Date'].split('/')[1]
+    holder['Month']  = holder['Pay_Date'][0].split('/')[1]
 
     global PayDF
     PayDF = pd.DataFrame(holder)
+    
 
 def openExp():
     root.filename = filedialog.askopenfilename(initialdir = '/Users/YC/Work_Repo/fYnanCe', title = 'Select A File', filetypes = (('csv files', '*.csv'), ('pdf files', '*.pdf'), ('all files', '*.*')))
@@ -59,7 +47,7 @@ def openExp():
     f3['Month'] = f1.Date[0].split('/')[1]
     global Expense
     Expense = f3
-    ExpLabel = Label(root, text = 'Expense file opned').pack()
+    ExpLabel = Label(root, text = root.filename).pack()
 
 def MergeSheet():
     global Moneyflow
@@ -85,11 +73,6 @@ mergeButton.pack()
 
 exit_button = Button(root, text = 'Exit App', command = root.destroy)
 exit_button.pack()
-
-
-
-
-
 
 root.mainloop()
 

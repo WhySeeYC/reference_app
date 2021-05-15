@@ -71,11 +71,3 @@ exit_button = Button(root, text = 'Exit App', command = root.destroy)
 exit_button.pack()
 
 root.mainloop()
-
-
-
-
-
-
-
-#pop up a window show the merged csv

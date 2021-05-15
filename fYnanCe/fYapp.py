@@ -1,7 +1,3 @@
-# Creating Gui for fYnance Project
-# Got an error: “from: can't read /var/mail/tkinter” ->/usr/bin/env python3  -> see https://stackoverflow.com/questions/16069816/getting-python-error-from-cant-read-var-mail-bio 
-# To solve this, select the interpreter to python 3.7
-
 import pandas as pd
 import pdfplumber
 import unicodedata
@@ -13,7 +9,7 @@ def openPay():
     root.filename = filedialog.askopenfilename(initialdir = '/Users/YC/Work_Repo/fYnanCe', title = 'Select A File', filetypes = (('csv files', '*.csv'), ('pdf files', '*.pdf'), ('all files', '*.*')))
     global payfile
     payfile = root.filename
-    payLabel = Label(root, text = payfile).pack()
+    payLabel = Label(root, text = 'Payslip file opended').pack()
 
 def PayslipInfo():
     with pdfplumber.open(payfile) as pdf:
@@ -47,7 +43,7 @@ def openExp():
     f3['Month'] = f1.Date[0].split('/')[1]
     global Expense
     Expense = f3
-    ExpLabel = Label(root, text = root.filename).pack()
+    ExpLabel = Label(root, text = 'Expense file opened').pack()
 
 def MergeSheet():
     global Moneyflow

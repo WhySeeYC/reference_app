@@ -23,6 +23,8 @@ def Extract_Data():
     cT1_Ref_Lower = []
     Iron_Ref = []
     PDFF_Ref = []
+    vendor_model = []
+    field_strength = []
     cwd = os.getcwd()
     userfolder = input("Enter the result folder name:")
     Results_folder = cwd + '/' + userfolder
@@ -54,6 +56,17 @@ def Extract_Data():
                     PDFF_Ref.append(float(split_text[62][1:4])) 
                 except:
                     continue   
+
+                last_page = report.pages[4]
+                page4_text = last_page.extract_text()
+                scanner = page4_text.split()[15]
+                if scanner.endswith('3T'):
+                    vendor_model.append(scanner[0:13])
+                    field_strength.append(scanner[13:])
+                else:
+                    vendor_model.append(scanner[0:16])
+                    field_strength.append(scanner[17:])
+    
         except:
             print('No report in the result folder')
         else:
@@ -75,18 +88,20 @@ def Extract_Data():
     DataDict['cT1_Ref_Lower'] = cT1_Ref_Lower
     DataDict['Iron_Ref'] = Iron_Ref
     DataDict['PDFF_Ref'] = PDFF_Ref
+    DataDict['vendor_model'] = vendor_model
+    DataDict['field_strength'] = field_strength
 
 def preDataFrame():
     Extract_Data()
     preData = pd.DataFrame(DataDict) # to put dictionary in a dataframe, all arrays mist be the same length
-    b = preData.rename(columns = {'EXP_number':'EXP_number (Pre PJ)', 'Portal_ID': 'Portal_ID (Pre PJ)', 'cT1_median':'cT1 median (Pre PJ)','Iron_median':'Iron median (Pre PJ)','PDFF_median':'PDFF median (Pre PJ)','cT1_Q1':'cT1 Q1 (Pre PJ)','Iron_Q1':'Iron Q1 (Pre PJ)','PDFF_Q1':'PDFF Q1 (Pre PJ)','cT1_Q3':'cT1 Q3 (Pre PJ)','Iron_Q3':'Iron Q3 (Pre PJ)','PDFF_Q3':'PDFF Q3 (Pre PJ)'})
+    b = preData.rename(columns = {'EXP_number':'EXP_number (Pre PJ)', 'Portal_ID': 'Portal_ID (Pre PJ)', 'cT1_median':'cT1 median (Pre PJ)','Iron_median':'Iron median (Pre PJ)','PDFF_median':'PDFF median (Pre PJ)','cT1_Q1':'cT1 Q1 (Pre PJ)','Iron_Q1':'Iron Q1 (Pre PJ)','PDFF_Q1':'PDFF Q1 (Pre PJ)','cT1_Q3':'cT1 Q3 (Pre PJ)','Iron_Q3':'Iron Q3 (Pre PJ)','PDFF_Q3':'PDFF Q3 (Pre PJ)', 'vendor_model':'vendor_model (Pre PJ)', 'field_strength': 'field_strength (Pre PJ)'})
     global prePJ
     prePJ = b
 
 
 def postDataFrame():
     Extract_Data()
-    postData = pd.DataFrame(DataDict).rename(columns = {'EXP_number':'EXP_number (Post PJ)', 'Portal_ID': 'Portal_ID (Post PJ)', 'cT1_median':'cT1 median (Post PJ)','Iron_median':'Iron median (Post PJ)','PDFF_median':'PDFF median (Post PJ)','cT1_Q1':'cT1 Q1 (Post PJ)','Iron_Q1':'Iron Q1 (Post PJ)','PDFF_Q1':'PDFF Q1 (Post PJ)','cT1_Q3':'cT1 Q3 (Post PJ)','Iron_Q3':'Iron Q3 (Post PJ)','PDFF_Q3':'PDFF Q3 (Post PJ)'})
+    postData = pd.DataFrame(DataDict).rename(columns = {'EXP_number':'EXP_number (Post PJ)', 'Portal_ID': 'Portal_ID (Post PJ)', 'cT1_median':'cT1 median (Post PJ)','Iron_median':'Iron median (Post PJ)','PDFF_median':'PDFF median (Post PJ)','cT1_Q1':'cT1 Q1 (Post PJ)','Iron_Q1':'Iron Q1 (Post PJ)','PDFF_Q1':'PDFF Q1 (Post PJ)','cT1_Q3':'cT1 Q3 (Post PJ)','Iron_Q3':'Iron Q3 (Post PJ)','PDFF_Q3':'PDFF Q3 (Post PJ)', 'vendor_model':'vendor_model (Post PJ)', 'field_strength': 'field_strength (Post PJ)'})
     global postPJ
     postPJ = postData
 
@@ -101,5 +116,5 @@ PostRecord_ID = OriginFile.iloc[0:, [0,3]].rename(columns = {'Portal ID LMS1 (po
 PreRecord = PreRecord_ID.merge(prePJ, on = ['Portal_ID (Pre PJ)'], how = 'outer')
 PostRecord = PostRecord_ID.merge(postPJ, on = ['Portal_ID (Post PJ)'], how = 'outer')
 
-Outer2 = PreRecord.merge(PostRecord, on = ['Record Id'], how = 'outer', copy = False)
-# Outer = PreRecord.merge(PostRecord, on = ['Record Id', 'cT1_Ref_Upper', 'cT1_Ref_Lower', 'Iron_Ref', 'PDFF_Ref'], how = 'outer') -> does not work
+FinalDF = PreRecord.merge(PostRecord, on = ['Record Id'], how = 'outer', copy = False)
+FinalDF.to_csv('FinalDF.csv')

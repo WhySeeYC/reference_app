@@ -14,7 +14,7 @@ root.mainloop()
 
 #Use grid ----------------------------------------------------
 import tkinter as tk
-from tkinter import *  #The * means import everything
+from tkinter import *  #The * me ans import everything
  
 root = Tk() 
 myLabel1 = Label(root, text = "Acceptence Criteria Checker")

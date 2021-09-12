@@ -1,0 +1,565 @@
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] ############################################################
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] # Output Factory initiated (html5)
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] # Building output for: CoverScan Patient Acquisition Manual for Scanners
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] # URL /document/edit/10960
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] # User: YC Wang
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] # Time: Tue, 07 Sep 2021 15:02:53 +0100
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] # Server: prague
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] ############################################################
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Group: custom
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Type: html5
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Transformation: /var/www/ccms/usr/perspectum/xsl/custom/layout-17630.xsl
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] File found: /var/www/ccms/usr/perspectum/xsl/custom/layout-17630.xsl
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] ############################################################
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Building output for: html5
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Using stylesheet: /var/www/ccms/usr/perspectum/xsl/custom/layout-17630.xsl
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Parameters for this build: (array) {"profile.audience":"Expert","profile.xinfo.market":"Clinical","profile.xinfo.product":"Siemens Scanner","profile.xinfo.version":"Cardiac gated sequence;None Cardiac gated"}
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Environment variables for this build: (array) {"taxonomies.propagate":"1","taxonomy.filter.strategy":"descendants","taxonomies.relationship":"MRERespiratoryDriver; MOLLICardiacSimulator","use.algolia.search":"0"}
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Building output for languages: (array) ["en"]
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Building multilang: no
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Building preview: no
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] ############################################################
+[07/Sep/2021 15:02:53 Europe/Dublin] [Info] Using build directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5
+[07/Sep/2021 15:02:54 Europe/Dublin] [Info] -- Generating source files
+[07/Sep/2021 15:02:54 Europe/Dublin] [Info] -- Propagating taxonomies: true
+[07/Sep/2021 15:02:54 Europe/Dublin] [Info] -- Source files have been generated
+[07/Sep/2021 15:02:54 Europe/Dublin] [Info] -- Publication has no unresolved dependencies.
+[07/Sep/2021 15:02:54 Europe/Dublin] [Info] -- Generating source files complete.
+[07/Sep/2021 15:02:55 Europe/Dublin] [Info] Localizing: publication-10960.xml
+[07/Sep/2021 15:02:55 Europe/Dublin] [Info] Language: en
+[07/Sep/2021 15:02:56 Europe/Dublin] [Info] Variable sets found: 2
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Inserting image links.
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found 50 image(s).
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Lung_to_kidney_coil_coverage.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Siemens_MR_Open_ Windows_Menu_KeyboardCombo.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Siemens_ECG_simulator.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips_ECG_simulator_highlight.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_adjust_heartrate_to_60BPM.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Liver2Kidney-Vol.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'lms_dixon.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips_Toggle_3_Point_Icon.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips_5_slice_pos.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_1_slice_planning.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips_pancreas_Molli.PNG'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image '3pointsPanc.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Siemens_pancreasMOLLIplanning.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_Pancreas_MOLLI.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_Pancreas_IDEAL.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Siemens_pancreaIDEALplanning.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips_pancreas_ideal.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'CorKidney.jpg'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Cor_kidneys_Molli.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_MOLLI_Kidney_1slice.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_Cardiac_Select1ECG_Channel.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Cardiac_localiser.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_2ch_Loc.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image '2Chamber_Localiser.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips_2chamber_Localiser.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_HLA_CINE.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image '4chamberLocaliser.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philip_4_chamber_localiser.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Siemens_Short_Axis_stack_planning.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_SA_stack_CINE.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips_SA_Stack_cine.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Siemens_HLA.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Phlips_HLA_BFFE2.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Avoid_LVOT.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'VLACine.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_VLA_CINE.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips_VLA2btfe.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'StackCine.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips_SA_Stack_localiser.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Siemens_CMRBASEPLANING.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE_BaseCardiac_Anotated.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips_CMR_T1MAP_BASE.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Cardiac T1_Maps.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Cardiac T2_Maps.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Lung_planning_localiser.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Lung_imaging.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'lung_planning.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'GE Data Export.png'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Patient_AdministrationPhilips.tif'
+[07/Sep/2021 15:02:57 Europe/Dublin] [Info] Found image 'Philips File Export.tif'
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Profiling parameters: (array) {"profile.audience":"Expert","profile.xinfo.market":"Clinical","profile.xinfo.product":"Siemens Scanner","profile.xinfo.version":"Cardiac gated sequence;None Cardiac gated"}
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Profiling customisation: /var/www/ccms/usr/perspectum/xsl/profile.xsl (not found)
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Transformation: publication-10960--en.org.xml -> publication-10960--en.xml [profile.xsl]
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Transformation: publication-10960--en.xml -> publication-10960--en.xml [internal-xref.xsl]
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Transformation: A-filelist.xml -> B-sorted.xml [IO.document.sortlang.xsl]
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Transformation: B-sorted.xml -> C-concatenated.xml [IO.document.concat.xsl]
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Transformation: B-sorted.xml -> index-en.xml [IO.document.head.xsl]
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Created copy: /var/www/ccms/usr/perspectum/xsl/custom/layout-17630.xsl -> /var/www/ccms/usr/perspectum/xsl/custom/61377113977ef.xsl
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Created symlink: /var/www/ccms/application/lib/docbook/xsl/html5/html5-2.page.xsl -> /var/www/ccms/usr/perspectum/xsl/custom/61377113977ef.page.xsl
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Created symlink: /var/www/ccms/application/lib/docbook/xsl/html5/html5-2.index.xsl -> /var/www/ccms/usr/perspectum/xsl/custom/61377113977ef.index.xsl
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Created symlink: /var/www/ccms/application/lib/docbook/xsl/html5/html5.toc.xsl -> /var/www/ccms/usr/perspectum/xsl/custom/61377113977ef.toc.xsl
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Created symlink: /var/www/ccms/application/lib/docbook/xsl/html5/html5.page.xsl -> /var/www/ccms/usr/perspectum/xsl/custom/61377113977ef.page.xsl
+[07/Sep/2021 15:02:59 Europe/Dublin] [Info] Created symlink: /var/www/ccms/application/lib/docbook/xsl/html5/html5.index.xsl -> /var/www/ccms/usr/perspectum/xsl/custom/61377113977ef.index.xsl
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-938dd24c-5039-db10-b352-401f966c3d29.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-a7fffde4-0dc5-2ea4-86cd-98edfc9fe7fa.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-fb017505-0b31-2b84-e55c-fd86712c2b30.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-fabcfd63-e2ef-0f86-1645-94fb0d9da156.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-a5f6aacc-a1e3-f4be-16c9-29e3b406576d.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-247e0f6c-a19c-487c-269e-1807e313b740.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-273c2b0b-9732-84f4-6d6f-1a2d0511fb02.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-c10581f1-6a59-2338-067e-e487c852924a.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-eb65c054-188f-981d-7c75-78e2c5bff359.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-4fb72682-eafb-cb8d-4ad5-028e16e3a790.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-1f672ab0-817a-d7da-a614-b6756ae0dcc2.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-9b33d738-3cc0-bc7a-49ac-f213adbade5b.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-e387974e-89a7-f8c0-eb31-0ee5a3efd52b.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-40febc06-aafa-6f05-acbe-b97f74e51799.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-797a04c9-28b4-b18b-424f-0813bf52bba8.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-89cc527a-ab53-ca12-c183-cb840bced462.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-edf8d308-417a-2f1b-f8cc-87959ff6d88a.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-aac78a02-ff6b-c9fc-e389-56b524578f0b.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-83d7869a-2bac-9336-7afc-a75ad940f4e8.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-ede394b3-0831-adaf-2e9f-43c1d22e41ca.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-99ba8564-3fb7-2db6-e2b1-d17c77b1ea61.png
+[07/Sep/2021 15:03:00 Europe/Dublin] [Info] Image copied: en/image/uuid-0468f2ff-6874-d813-5ea2-0717809d80cc.png
+[07-Sep-2021 15:03:01 Europe/Dublin] Parsing manifest file: css/*, css/image/*, css/image/callouts/*, js/*, js/jquery-3/*, fonts/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: css/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap-3.0.2.min.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap-theme-3.0.2.min.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap-theme.min.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap-theme.min.css.map'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap.min.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap.min.css.map'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'content-theme1.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'content-theme2.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'docbook.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'font-awesome.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'graphical-lists.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5.algoliasearch.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5.algoliasearchpage.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'mathml.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto.font.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'rwd-table.min.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'sm-core-css.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'sm-simple.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-api-responsive.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-api.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-common.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-index-page.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-modern-tables.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-print.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-responsive.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-revealjs-slides.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-single-page.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme0.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme1-colors.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme1.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme2-colors.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme2.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme3-colors.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme3.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme3b-colors.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme3b.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: css/image/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'breadcrumb-seperator.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'caution.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo-blue-inverted.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo-blue.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo-white.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo-white.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'important.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'note.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'portal1-bg.jpg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'portal2a-bg.jpg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'portal2b-bg.jpg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'portal2c-bg.jpg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'subheader-bg.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'warning.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: css/image/callouts/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '1.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '1.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '1.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '10.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '10.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '10.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '11.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '11.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '11.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '12.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '12.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '12.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '13.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '13.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '13.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '14.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '14.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '14.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '15.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '15.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '15.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '16.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '17.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '18.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '19.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '2.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '2.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '2.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '20.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '21.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '22.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '23.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '24.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '25.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '26.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '27.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '28.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '29.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '3.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '3.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '3.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '30.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '4.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '4.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '4.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '5.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '5.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '5.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '6.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '6.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '6.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '7.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '7.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '7.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '8.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '8.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '8.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '9.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '9.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '9.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: js/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'ajax-loading.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'anchorlinks.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'checklist.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'clipboard.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'cookie-consent.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'create-toc.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'csh.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fuse.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'hilitor.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5-2-ajax-hp.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5-2-ajax.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5-2-mp-common.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5-2-portal.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5-2.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5.algoliasearch.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5.algoliasearchpage.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5.fuse.search.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-1.10.2.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-1.10.2.min.map'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-migrate-3.0.1.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-ui-1.10.3.custom.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.event.move.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.event.swipe.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.mark.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.paligocode.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.smartmenus.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.sticky.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'lunr-single-lang.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'lunr.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'materialize.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'mspace.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'purl.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'respond.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'responsive-tables.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'rwd-table.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'script-api.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'script-revealjs-slides.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'script.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'search.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'updateurl.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: js/jquery-3/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-3.4.1.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-3.5.1.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-3.6.0.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: fonts/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'FontAwesome.otf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fontawesome-webfont.eot'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fontawesome-webfont.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fontawesome-webfont.ttf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fontawesome-webfont.woff'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fontawesome-webfont.woff2'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'glyphicons-halflings-regular.eot'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'glyphicons-halflings-regular.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'glyphicons-halflings-regular.ttf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'glyphicons-halflings-regular.woff'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'glyphicons-halflings-regular.woff2'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.eot'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.ttf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.woff'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.woff2'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.eot'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.ttf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.woff'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.woff2'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.eot'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.ttf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff2'
+[07-Sep-2021 15:03:01 Europe/Dublin] Parsing manifest file: css/*, css/image/*, css/image/callouts/*, js/*, fonts/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: css/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap-3.0.2.min.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap-theme-3.0.2.min.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap-theme.min.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap-theme.min.css.map'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap.min.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap.min.css.map'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'content-theme1.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'content-theme2.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'docbook.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'font-awesome.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'graphical-lists.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5.algoliasearch.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5.algoliasearchpage.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'mathml.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto.font.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'rwd-table.min.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'sm-core-css.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'sm-simple.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-api-responsive.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-api.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-common.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-index-page.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-modern-tables.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-print.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-responsive.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-revealjs-slides.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style-single-page.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'style.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme0.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme1-colors.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme1.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme2-colors.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme2.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme3-colors.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme3.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme3b-colors.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'theme3b.css'
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: css/image/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'breadcrumb-seperator.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'caution.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo-blue-inverted.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo-blue.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo-white.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo-white.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'corporate-logo.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'important.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'note.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'portal1-bg.jpg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'portal2a-bg.jpg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'portal2b-bg.jpg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'portal2c-bg.jpg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'subheader-bg.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'warning.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: css/image/callouts/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '1.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '1.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '1.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '10.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '10.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '10.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '11.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '11.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '11.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '12.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '12.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '12.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '13.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '13.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '13.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '14.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '14.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '14.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '15.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '15.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '15.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '16.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '17.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '18.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '19.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '2.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '2.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '2.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '20.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '21.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '22.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '23.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '24.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '25.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '26.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '27.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '28.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '29.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '3.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '3.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '3.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '30.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '4.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '4.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '4.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '5.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '5.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '5.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '6.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '6.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '6.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '7.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '7.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '7.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '8.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '8.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '8.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '9.gif'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '9.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '9.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: js/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'ajax-loading.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'anchorlinks.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'bootstrap.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'checklist.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'clipboard.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'cookie-consent.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'create-toc.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'csh.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fuse.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'hilitor.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5-2-ajax-hp.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5-2-ajax.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5-2-mp-common.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5-2-portal.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5-2.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5.algoliasearch.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5.algoliasearchpage.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'html5.fuse.search.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-1.10.2.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-1.10.2.min.map'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-migrate-3.0.1.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery-ui-1.10.3.custom.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.event.move.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.event.swipe.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.mark.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.paligocode.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.smartmenus.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'jquery.sticky.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'lunr-single-lang.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'lunr.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'materialize.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'mspace.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'purl.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'respond.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'responsive-tables.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'rwd-table.min.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'script-api.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'script-revealjs-slides.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'script.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'search.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'updateurl.js'
+[07-Sep-2021 15:03:01 Europe/Dublin] Filename: fonts/*
+[07-Sep-2021 15:03:01 Europe/Dublin] Source directory: /var/www/ccms/application/lib/docbook/xsl/html5
+[07-Sep-2021 15:03:01 Europe/Dublin] Target directory: /paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'FontAwesome.otf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fontawesome-webfont.eot'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fontawesome-webfont.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fontawesome-webfont.ttf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fontawesome-webfont.woff'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'fontawesome-webfont.woff2'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'glyphicons-halflings-regular.eot'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'glyphicons-halflings-regular.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'glyphicons-halflings-regular.ttf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'glyphicons-halflings-regular.woff'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'glyphicons-halflings-regular.woff2'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.eot'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.ttf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.woff'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-300.woff2'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.eot'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.ttf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.woff'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-700.woff2'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.eot'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.svg'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.ttf'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file 'roboto-v20-vietnamese_latin-ext_latin_greek-ext_greek_cyrillic-ext_cyrillic-regular.woff2'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '/var/www/ccms/usr/perspectum/xsl/custom/assets/layout-17630/60f82c7881c03.png' to '/paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out/css/image/corporate-logo.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '/var/www/ccms/usr/perspectum/xsl/custom/assets/layout-17630/6101890b8405c.png' to '/paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out/css/image/portal-logo.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '/var/www/ccms/usr/perspectum/xsl/custom/assets/layout-17630/610188e14a690.png' to '/paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out/css/image/portal-bg.png'
+[07-Sep-2021 15:03:01 Europe/Dublin] Copy file '/var/www/ccms/usr/perspectum/xsl/custom/assets/layout-17630/60f96ff23fc20.ico' to '/paligo/tmp/perspectum/production-613770f7c230c8.70996082/10960-CoverScan_Patient_Acquisition_Manual_for_Scanners-html5/out/favicon.ico'
+[07-Sep-2021 15:03:02 Europe/Dublin] Post build HTML5
+[07/Sep/2021 15:03:02 Europe/Dublin] [Info] Transformation: index-en.html -> toc-en.html [61377113977ef.toc.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-14021-glossary.html -> 10960-14021-glossary.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-14112-scope.html -> 10960-14112-scope.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-14373-continuing-education.html -> 10960-14373-continuing-education.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11122-t1-mapping-and-cardiac-imaging-requirement.html -> 10960-11122-t1-mapping-and-cardiac-imaging-requirement.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11123-t2--and-proton-density-fat-fraction-mapping-requirement.html -> 10960-11123-t2--and-proton-density-fat-fraction-mapping-requirement.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11124-volume-requirement.html -> 10960-11124-volume-requirement.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11078-coil-requirement.html -> 10960-11078-coil-requirement.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10967-cardiac-trace-simulator-requirement.html -> 10960-10967-cardiac-trace-simulator-requirement.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11107-cardiac-trace-input-requirement.html -> 10960-11107-cardiac-trace-input-requirement.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11121-compatibility-and-requirements.html -> 10960-11121-compatibility-and-requirements.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-14145-lms-introduction.html -> 10960-14145-lms-introduction.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10969-patient-registration.html -> 10960-10969-patient-registration.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11108-patient-positioning.html -> 10960-11108-patient-positioning.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10972-breathing-instructions.html -> 10960-10972-breathing-instructions.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10970-pre-scan-preparation.html -> 10960-10970-pre-scan-preparation.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11128-three-plane.html -> 10960-11128-three-plane.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-13979-liver-to-kidney.html -> 10960-13979-liver-to-kidney.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10976-liver-lms-sequences.html -> 10960-10976-liver-lms-sequences.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-13991-pancreas-molli.html -> 10960-13991-pancreas-molli.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-14003-pancreas-ideal.html -> 10960-14003-pancreas-ideal.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11024-kidneys-molli.html -> 10960-11024-kidneys-molli.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11155-cardiac-trace-simulator-off-and-coil-coverage-adjustment.html -> 10960-11155-cardiac-trace-simulator-off-and-coil-coverage-adjustment.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10984-cardiac-planning-localiser.html -> 10960-10984-cardiac-planning-localiser.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10985-two-chamber-localiser--vertical-long-axis---vla-.html -> 10960-10985-two-chamber-localiser--vertical-long-axis---vla-.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10986-four-chamber-localiser--horizontal-long-axis---hla-.html -> 10960-10986-four-chamber-localiser--horizontal-long-axis---hla-.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10987-short-axis-stack-localiser.html -> 10960-10987-short-axis-stack-localiser.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10989-hla-cine.html -> 10960-10989-hla-cine.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10990-vla-cine.html -> 10960-10990-vla-cine.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10991-short-axis-stack-cine.html -> 10960-10991-short-axis-stack-cine.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-14347-cine-acquisitions.html -> 10960-14347-cine-acquisitions.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10992-cardiac-t1-map.html -> 10960-10992-cardiac-t1-map.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-14057-cardiac-t2-map.html -> 10960-14057-cardiac-t2-map.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-14422-lung-planning-localiser.html -> 10960-14422-lung-planning-localiser.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-14123-lung-imaging.html -> 10960-14123-lung-imaging.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11109-acquisition-guide.html -> 10960-11109-acquisition-guide.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11106-data-export.html -> 10960-11106-data-export.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-11070-acquisition-checklist.html -> 10960-11070-acquisition-checklist.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-18649-questionnaire.html -> 10960-18649-questionnaire.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-14408-issue-control-coverscan-md.html -> 10960-14408-issue-control-coverscan-md.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: 10960-10997-approvals.html -> 10960-10997-approvals.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: index-en.html -> index-en.html [61377113977ef.page.xsl]
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Generating index page.
+[07/Sep/2021 15:03:03 Europe/Dublin] [Info] Transformation: index.manifest -> index.html [61377113977ef.index.xsl]
+[07/Sep/2021 15:03:04 Europe/Dublin] [Info] # Took 11.223559 seconds to render.

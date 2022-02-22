@@ -1,4 +1,10 @@
 .DS_Store
 .Rhistory
-venv/
 .vscode/
+post/
+pre/
+venv/
+
+# Ignore writings
+*.pdf
+*.docx

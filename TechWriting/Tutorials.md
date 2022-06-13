@@ -13,8 +13,7 @@ presentation:
 ## Technical Writing for Sustainable Documentation
 Yi-Chun Wang
 
-<!-- slide align="left" data-notes: different types of output, some industry- motivated standards and rules. Then the next two topics I am going to touch on are focusing on how to efficiently produce quality output. I will also briefly draw the line between the tools to  produce software docs and hardware docs. Afterwards, I will quickly talk about the good practice that I learned when practising technical writing. Last but not least, to understand the key metrics you can use to evaluate the quality of the documentation, I will try and provide some examples. The goal is to share with you a general overview of this profession and skill set and the umbrella  -->
-
+<!-- slide align="left" data-notes="different types of output, some industry- motivated standards and rules. Then the next two topics I am going to touch on are focusing on how to efficiently produce quality output. I will also briefly draw the line between the tools to  produce software docs and hardware docs. Afterwards, I will quickly talk about the good practice that I learned when practising technical writing. Last but not least, to understand the key metrics you can use to evaluate the quality of the documentation, I will try and provide some examples. The goal is to share with you a general overview of this profession and skill set and the umbrella"  -->
 ## Outline
 Types of Technical Writing Output\
 Style Guides & Rules\
@@ -33,13 +32,13 @@ Resources\
 - Deployment Docs
     - instructions to ship a software product live
 
-<!-- slide data-notes: . "The first one is easy, the UI documentation gives instructions of how to use a tool. The one on the left is an example of hardware documentation, this is the instructions of the different markers on a phantom which will then referred by MR technologist to scan the phantom. The examples on the right is the software user interface of 3 different vendors' scanning console." -->
+<!-- slide data-notes="The first one is easy, the UI documentation gives instructions of how to use a tool. The one on the left is an example of hardware documentation, this is the instructions of the different markers on a phantom which will then referred by MR technologist to scan the phantom. The examples on the right is the software user interface of 3 different vendors' scanning console." -->
 ## UI Docs\
 ![hardwareDoc](/TechWriting/HardwareDoc_Example.png){ width=26% }
 ![softwareDoc](/TechWriting/Software_Doc_Three_Vendor_Example.png){ width=65% }
 
 
-<!-- slide data-background-image="https://paligo.net/docs/en/image/uuid-df6e91dd-519f-a4a8-2813-525ad933aae8.png" data-background-size="contain" data-notes: "The next one is API documentation. Application Programming Interface is a gate way for the user to interact with the backend or database of a software. A very common use case is when one want to audit or do some statistical analysis of the resources stored when using the software. So API documentation is designed for encoding simple and complex search expressions and parameters in URLs. Usually you will have provide instructions for different query languages"-->
+<!-- slide data-background-image="https://paligo.net/docs/en/image/uuid-df6e91dd-519f-a4a8-2813-525ad933aae8.png" data-background-size="contain" data-notes="The next one is API documentation. Application Programming Interface is a gate way for the user to interact with the backend or database of a software. A very common use case is when one want to audit or do some statistical analysis of the resources stored when using the software. So API documentation is designed for encoding simple and complex search expressions and parameters in URLs. Usually you will have provide instructions for different query languages"-->
 ## Developer (API) Docs
 
 <!-- slide  data-background-image="https://docs.docker.com/engine/images/architecture.svg" data-background-size="contain" data-notes="The last one is deployment documentation, this is when a software developers completed an app and would like to ship or deploy a feature of the software or the whole software." -->
@@ -84,13 +83,13 @@ Again this is a skill that comes with practice and experience so don't kill your
 - reuse topic-based content <!-- .element: class="fragment" data-fragment-index="2" -->
 - recycle generic content<!-- .element: class="fragment" data-fragment-index="3" -->
 ![](/TechWriting/MakeGeneric.png)
-- 💡writing in Markdown also makes the file independent on systems <!-- .element: class="fragment" data-fragment-index="4" -->
+
 
 
 <!-- slide data-notes="In terms of tools, there are way too many tools we can learn and we never have enough time. However, there are many tools in here you have already use anyway, it is just a matter of applying with a different focus which is to produce technical documentation
 The top row are three (component) content management system that are widely used in various types of industries. Among which Paligo and MadCap Flare is component-based. These are especially good for hardware documentation which people will need to print out.
-In the middle row, these are graphic design tools. I never use Adobe WireFrame and Illustrator, but the former 3 all have the potential to create vector graphics and create template plus spreadsheet to batch export graphics. Kapwing and Camtasia are two common software used to produce video type of tutorials.
-In the second last row, these are code editors which can be used for a workflow recently developed called, Docs as Code, and these are certainly requirements to produce software documentations. However, I will say just focus on learning some of them and the rest will be pretty easy to transfer. Overleaf, needless to say, is super common when you write in Letax. Matlab livescript has nice function where you can run a section of code instead of the whole thing. Rmarkdown pluse the knitr function allow you to knitr/export the whole notebook in PDF or HTML. Jupyter notebook is also similar. 
+In the middle row, these are graphic design tools. I never use Adobe FrameMaker and Indesign, but the former 3 all have the potential to create vector graphics and create template plus spreadsheet to batch export graphics. Kapwing and Camtasia are two common software used to produce video type of tutorials.
+In the second last row, these are code editors which can be used to implement a workflow that is recently developed called, Docs as Code, and these are certainly requirements to produce software documentations. However, I will say just focus on learning some of them and the rest will be pretty easy to transfer. Overleaf, needless to say, is super common when you write in Letax. Matlab livescript has nice function where you can run a section of code instead of the whole thing. Rmarkdown pluse the knitr function allow you to knitr/export the whole notebook in PDF or HTML. Jupyter notebook is also similar. 
 In the last row, Pandoc is a universal document converter and is operated as a command line tool however, it is very powerful because it allows you to convert from ebook, to word to markdown to PDF AND the other way around and you can couple up with Makefile to automate the batch output pipeline. DITA we briefly talked about already. Lastly VS code is just the most powerful editor I have ever user. This presentation is made in VS code.
 The graph on the right is the learning curve of documentations tools produced by Mason Egger"-->
 ## Tools for Production Efficiency
@@ -108,7 +107,7 @@ The graph on the right is the learning curve of documentations tools produced by
 ![](/TechWriting/MakefileDemo.png)
 
 
-<!-- slide data-notes="At this very moment, I have not come across a tool that has the single-sourcing/Multi-channel publishing concept but PowerPoint has a rather close alternative which is the custom slide show. For example, when working on the pineapple juice project, I could separate the meetings presentation in three different files but instead I use one and custom slide show at the point of presenting. The benefit is that I can centrally manage all contents and create in one go. Recently, I have also found out you can use the `right-click hide slide` function to temporarily not show some slides!"-->
+<!-- slide data-notes="At this very moment, I have not come across a graphical tool that has the single-source/Multi-channel publishing concept but PowerPoint has a rather close alternative which is the custom slide show. For example, when working on the pineapple juice project, I could separate the meetings presentation in three different files but instead I use one and custom slide show at the point of presenting. The benefit is that I can centrally manage all contents and create in one go. Recently, I have also found out you can use the `right-click hide slide` function to temporarily not show some slides!"-->
 ## Tech Writing Approach
 - Think about target audience
     - Common variables: operating system, company name, product name, sequence techniques ⇒ tables
@@ -116,15 +115,13 @@ The graph on the right is the learning curve of documentations tools produced by
 ![](/TechWriting/PowerPointCustomSlideShow.png)
 
 
-<!-- slide data-notes: to evaluate the quality of technical documentations, you want to look at 3 things and bare in mind this is talking about all output collectively. So it is not just one document, it includes all future versions of the document, the variant of that document. 3 simple things: standardised, scalable and sustainable
-For standardised, I am going to refer back to the 4 steps GitHub Docs team's writing approach, if you are in an organisation, there might be branding to consider as well. The image here showed you two consecutive versions of the same topic Axial Tongue SE, you will likely see a conceptual paragraph of what this sequence is about. Then step 2, procedure document, then step 3 references, warning box. Step four, review. I would like to point out for example, the Axial Tongue SE, if you don't write it in one go, it might likely be Tongue Axial SE. 
--->
+<!-- slide data-notes="to evaluate the quality of technical documentations, you want to look at 3 things and bare in mind this is talking about all output collectively. So it is not just one document, it includes all future versions of the document, the variant of that document. 3 simple things: standardised, scalable and sustainable.     For standardised, I am going to refer back to the 4 steps GitHub Docs team's writing approach. The image here showed you two consecutive versions of the same topic Axial Tongue SE, you will likely see a conceptual paragraph of what this sequence is about. Then step 2, procedure document, then step 3 references, warning box. Step four, review.   If you are in an organisation, there might be branding to consider as well.   I would like to point out for example, the Axial Tongue SE, if you don't write it in one go, it might likely be Tongue Axial SE." -->
 ## Evaluation of Docs
 - Standardised (following open-source writing style?)
 ![](/TechWriting/Graphics%20Improvement.png)
 
-<!-- slide data-notes="The next point is about scalable, one thing that software engineer pointed out is that if you're documentation sucks, the whole project can be abandon by people. Inevitably, we will need to collaborate with people, reduce some confusion and let other tech writer or developer know immediately. 
-The right is organised based on type then subject, the left is organised based on project then type. In the case when the next writer want to reuse steps in, they directly go to the steps folder without needing to know what is in the Booking system's project." -->
+<!-- slide data-notes="The next point is about scalable, one thing that software engineer pointed out is that if you're documentation sucks, the whole project can be abandon by people. Inevitably, we will need to collaborate with people, so what we need to do is to reduce as much confusion as possible and let other tech writer or developer know immediately.    
+The right is organised based on type then subject, the left is organised based on project then type. In the case when the next writer want to reuse steps in, they directly go to the steps folder without needing to know what is in the Booking system's project.   One other good thing of organising resources this way is that it will be very easy to do house keeping. For example if all of a sudden, we want to change all the system steps from bullet point to order list" -->
 ## Evaluation of Docs
 - Scalable (Reduce confusion, organise resources based on function not project)
 
@@ -139,6 +136,7 @@ The right is organised based on type then subject, the left is organised based o
 ## Evaluation of Docs
 - Sustainable (Using plain-text format? Reused in different occasions?)
 ![](/TechWriting/ReuseStatistics.png)
+- 💡writing in Markdown makes the file independent on systems <!-- .element: class="fragment" data-fragment-index="4" -->
 
 
 <!-- slide align="left" data-background-color="#000000" -->
@@ -215,7 +213,7 @@ GCP, Good Clinical Practice -->
 - Layout Editor
 
 <!-- slide -->
-## Techical Documents and Documentation Output Strategy
+## Technical Documents and Documentation Output Strategy
 - Software and hardware manual
 - internal technical documentation
 - Pixel workflow
@@ -246,9 +244,6 @@ GCP, Good Clinical Practice -->
 ## Other Tips and Tricks
 Organise your file functionally
 Create your own naming convention: Use Variable names as the last word in the file name
-
-
-TODO: cut the recording
 
 
  

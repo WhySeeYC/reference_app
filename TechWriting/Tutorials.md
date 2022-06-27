@@ -115,10 +115,19 @@ The graph on the right is the learning curve of documentations tools produced by
 ![](/TechWriting/PowerPointCustomSlideShow.png)
 
 
+
+<!-- slide -->
+## Evaluation of Docs
+- Standardised<!-- .element: class="fragment" data-fragment-index="1" -->
+- Scalable <!-- .element: class="fragment" data-fragment-index="2" -->
+- Sustainable <!-- .element: class="fragment" data-fragment-index="3" -->
+
+
 <!-- slide data-notes="to evaluate the quality of technical documentations, you want to look at 3 things and bare in mind this is talking about all output collectively. So it is not just one document, it includes all future versions of the document, the variant of that document. 3 simple things: standardised, scalable and sustainable.     For standardised, I am going to refer back to the 4 steps GitHub Docs team's writing approach. The image here showed you two consecutive versions of the same topic Axial Tongue SE, you will likely see a conceptual paragraph of what this sequence is about. Then step 2, procedure document, then step 3 references, warning box. Step four, review.   If you are in an organisation, there might be branding to consider as well.   I would like to point out for example, the Axial Tongue SE, if you don't write it in one go, it might likely be Tongue Axial SE." -->
 ## Evaluation of Docs
 - Standardised (following open-source writing style?)
 ![](/TechWriting/Graphics%20Improvement.png)
+- Consistent language
 
 <!-- slide data-notes="The next point is about scalable, one thing that software engineer pointed out is that if you're documentation sucks, the whole project can be abandon by people. Inevitably, we will need to collaborate with people, so what we need to do is to reduce as much confusion as possible and let other tech writer or developer know immediately.    
 The right is organised based on type then subject, the left is organised based on project then type. In the case when the next writer want to reuse steps in, they directly go to the steps folder without needing to know what is in the Booking system's project.   One other good thing of organising resources this way is that it will be very easy to do house keeping. For example if all of a sudden, we want to change all the system steps from bullet point to order list" -->
@@ -136,7 +145,8 @@ The right is organised based on type then subject, the left is organised based o
 ## Evaluation of Docs
 - Sustainable (Using plain-text format? Reused in different occasions?)
 ![](/TechWriting/ReuseStatistics.png)
-- 💡writing in Markdown makes the file independent on systems <!-- .element: class="fragment" data-fragment-index="4" -->
+
+<!-- - 💡writing in Markdown makes the file independent on systems .element: class="fragment" data-fragment-index="4" -->
 
 
 <!-- slide align="left" data-background-color="#000000" -->
@@ -174,11 +184,11 @@ GCP, Good Clinical Practice -->
 <!-- slide -->
 ## Paligo Tutorial
 - UIs and the functions of Paligo
-- Techical Documents Output Strategy
+- Technical Documents Output Strategy
 - Reuse and Profiling Mechanism
-- Evaluate Documents Production
 - Complete Manual Creation Process
 - Review and Sign off Process
+- Evaluate Documents Production
 - Other Tips and Tricks
 
 <!-- slide -->
@@ -220,25 +230,40 @@ GCP, Good Clinical Practice -->
 
 <!-- slide -->
 ## Reuse and Profiling Mechanism
-- Variables (in spreadsheet -> in editor blue text -> previw mode)
+- Variables (in spreadsheet -> in editor blue text -> preview mode)
 - Profiling(go through xinfo: in the element attribute pannel -> show publishing widge)
 - Layout configuration (show two taste)
 
+<!-- slide align="left" -->
+## Review and Sign off Process
+Naming Convention:\
+CRO:\
+
+- [company_name] [project_name] Patient Acquisition Manual for XX Scanners - MRAXXXX
+- [company_name] [project_name] Patient Acquisition Manual for XX Scanners - MRAXXXX - Signed <!-- .element: class="fragment" data-fragment-index="1" -->
+
+Clinical Colab:\
+
+- [project_name] Patient Acquisition Manual for XX Scanners - MRAXXXX
+- [project_name] Patient Acquisition Manual for XX Scanners - MRAXXXX - Signed <!-- .element: class="fragment" data-fragment-index="1" -->
+
 <!-- slide -->
 ## Evaluate Documents Production
-- Sustainable(show most reused topic in structure view and dashboard)
-- Scalable(MRA manual count)
 - Standardised
-- Writing Style Guides 
-    - GitHub give very good example of thought process of creating documentation: 
-        - conceptual paragraph, 
-        - Procedural paragraphse, 
-        - reference guides,
-        - Provide review
-    - (show 3 Vendor Instructions)
-- whether the language is consistent,(this is when reuse text is useful) 
-    - e.g. if there is any artefact (show global search and replace) 
-- Whether the general view is consistent
+    - Writing Style Guides 
+        - GitHub give very good example of thought process of creating  documentation: 
+            - conceptual paragraph, 
+            - Procedural paragraphse, 
+            - reference guides,
+            - Provide review
+        - (show 3 Vendor Instructions)
+    - whether the language is consistent,(this is when reuse text is    useful) 
+        - e.g. if there is any artefact (show global search and replace) 
+    - Whether the general view is consistent
+- Scalable (MRA manual count)
+- Sustainable(show most reused topic in structure view and dashboard)
+
+
 
 <!-- slide -->
 ## Other Tips and Tricks

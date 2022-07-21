@@ -188,7 +188,8 @@ GCP, Good Clinical Practice -->
 - Reuse and Profiling Mechanism
 - Complete Manual Creation Process
 - Review and Sign off Process
-- Evaluate Documents Production
+- Evaluate Document Production
+- Translation with Paligo
 - Other Tips and Tricks
 
 <!-- slide -->
@@ -263,6 +264,54 @@ Clinical Colab:\
 - Scalable (MRA manual count)
 - Sustainable(show most reused topic in structure view and dashboard)
 
+<!-- slide -->
+## Translation with Paligo
+Yi-Chun Wang, 19 July 2022
+
+- Translation Assignment from Admin <!-- .element: class="fragment" data-fragment-index="1" -->
+- Translation for Translators and Proof-readers <!-- .element: class="fragment" data-fragment-index="1" -->
+- Between Translators and Proof-readers <!-- .element: class="fragment" data-fragment-index="1" -->
+- Preparing Translated Publication <!-- .element: class="fragment" data-fragment-index="1" -->
+
+<!-- slide align="left"-->
+### Translation Assignment from Admin
+- Assign user licenses:
+    - Translator: <!-- .element: class="fragment" data-fragment-index="1" -->
+        - Internal (Admin license)<!-- .element: class="fragment" data-fragment-index="1" -->
+        - External(Contributor License) <!-- .element: class="fragment" data-fragment-index="1" -->
+    - Proof-Reader: Reviewer license<!-- .element: class="fragment" data-fragment-index="2" -->
+- Change release status (Work in Progress -> In translation)
+- Create assignment (Task, Duration, Message on Instructions)
+- Support communications between Translator and Proof-reader
+
+<!-- slide align="left"-->
+### Translation for Translators and Proof-readers
+- Read Paligo Instruction for Translators
+![Instruction](/TechWriting/InstructionForTranslators.png)
+
+<!-- slide align="left"-->
+### Between Translators and Proof-readers
+- Jira ticket to track workflow. [Jira Board](https://perspectum.atlassian.net/browse/IMSOL-480)
+- Translator: Done or Decline. [Resources](https://paligo.net/docs/en/translator-instructions-for-translation-assignments.html)
+- Proof-reader: Approved or Needs work. [Resources](https://paligo.net/docs/en/reviewer-instructions-for-translation-review-assignments.html)
+
+<!-- slide align="left"-->
+### Preparing Translated Publication
+- prepare variables for project-specific information<!-- .element: class="fragment" data-fragment-index="1" -->
+- write everything in text editor<!-- .element: class="fragment" data-fragment-index="2" -->
+- prepare layout configuration<!-- .element: class="fragment" data-fragment-index="3" -->
+- prepare publication<!-- .element: class="fragment" data-fragment-index="4" -->
+- add initials and send to sign off<!-- .element: class="fragment" data-fragment-index="5" -->
+
+<!-- slide align="left"-->
+## Known Issue & Future Work
+- Variables need to be translated as separate task →currently under support from Paligo engineer
+- How to set profiles, variables
+- [Paligo Tutorials](https://perspectumdiagnostics.sharepoint.com/:f:/g/EhhikcDbhIxAj9HYGM7oSxIBzWtyNL2ZVT-aCeuSK1X0vw?e=Qy7Tlf)
+- Other?
+
+<!-- slide -->
+Thank You ❤️\
 
 
 <!-- slide -->

@@ -7,7 +7,9 @@ import requests
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urlencode
 import lxml
-
+import html5lib
+import json
+from Bio import Entrez
 
 # %%
 # read in excel list of publications, store as journal data frame and abstract data frame
@@ -43,48 +45,83 @@ for url, i in zip(journal_df.DOI, range(len(journal_df.DOI))):
     else:
         weird_doi["Study"].append(journal_df['Concatenated'][i])
         weird_doi["url"].append(url)
-pd.DataFrame(weird_doi)
-
-
-
-
+pd.set_option('display.max_colwidth', 400)
+Weird_doi_DF = pd.DataFrame(weird_doi)
+Weird_doi_DF.dropna(how = 'all')
 
 
 
 
 # %%
-# TODO: scrap out the citation detail 
+# Scrap out the citation detail 
 # https://stackoverflow.com/questions/69428700/how-to-scrape-full-paper-citation-from-google-scholar-search-results-python
 # https://medium.com/@nandinisaini021/scraping-publications-of-aerial-image-research-papers-on-google-scholar-using-python-a0dee9744728
+# https://stackoverflow.com/questions/62414552/scraping-citation-text-from-pubmed-search-results-with-beautifulsoup-and-python
+# https://nexus.od.nih.gov/all/2015/08/31/pmid-vs-pmcid-whats-the-difference/
+
+
+journal_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name = 0, header=0)
+abstract_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name=1, header=0)
 
 headers  = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}
-url = 'https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=https%3A%2F%2Fwww.journal-of-hepatology.eu%2Farticle%2FS0168-8278%2813%2900650-8%2Ffulltext&btnG='
-
-response = requests.get(url, headers=headers)
-
-soup = bs(response.content, features='lxml')
-print(soup)
-
-main_div = soup.find_all('div', {'id': 'gs_res_ccl_mid'}) # empty list
-divs = main_div.find_all('div', {'class': 'gs_r gs_or gs_scl'}) # AttributeError: ResultSet object has no attribute 'find_all'. You're probably treating a list of elements like a single element. Did you call find_all() when you meant to call find()?
 
 
+query = journal_df.Title[i].rstrip().lstrip().replace(' ','+')
 
-
-
-
-
-
-
-
-
-
+# get citation function
+def get_citation(query):
+    url = 'https://pubmed.ncbi.nlm.nih.gov/?term='+query
+    response = requests.get(url, headers=headers)
+    soup = bs(response.text, features='lxml')
+    first_article = soup.select_one('article', class_ = 'full-docsum')
+    pmid = first_article.find('span', class_ = "docsum-pmid").get_text(strip = True)
+    second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' # get the pmid and actually head in the paper's Pubmed page
+    second_response = requests.get(second_url, headers=headers)
+    soup2 = second_response.json() # render the response in json format
+    apa_orig = soup2['apa']['orig']
+    start_index = apa_orig.index('.,')
+    end_index = apa_orig.index('(')
+    modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ')
+    print(modify)
 
 
 
 
 
+#%%
+# See if biopython will work. Biopython is PubMed's public API
 
+from Bio import Entrez
+#%%
+# Define the function to perform the search
+def search(query):
+    Entrez.email = 'yi-chun.wang@perspectum.com'
+    handle = Entrez.esearch(db = 'pubmed',
+                            sort = 'relevance',
+                            retmax = '1',
+                            retmode = 'xml',
+                            term = query)
+    
+    global search_results
+    search_results = Entrez.read(handle)
+    
+
+#%%
+# fetch the details for all retrieved articles 
+
+def fetch_details(id_list):
+    # ids = ','.join(id_list)
+    Entrez.email = 'yi-chun.wang@perspectum.com'
+    handle = Entrez.efetch(db = 'pubmed',
+                            retmode = 'xml',
+                            id = id_list)
+    global fetch_results
+    fetch_results = Entrez.read(handle)
+
+
+#%%
+import json
+print(json.dumps(fetch_results['PubmedArticle'][0], indent=2))
 
 
 # %%
@@ -211,5 +248,3 @@ for i in range(0, 110, 10):
 # understand how to parse out APA citation
 # structure of a URL: scheme://netloc/path;parameters?query#fragment
 # What is percent-encoded queries? Percent-encoding, also known as URL encoding, is a method to encode arbitrary data in a Uniform Resource Identifier (URI) using only the limited US-ASCII characters legal within a URI.
-
-def google_scholar(query, n)

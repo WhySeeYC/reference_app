@@ -2,14 +2,13 @@
 # Import Relevant libraries
 import pandas as pd # this library organises data frame 
 import openpyxl # this library open excel file
-import webbrowser # this library use to open web browser, not needed
 import requests 
 from bs4 import BeautifulSoup as bs
-from urllib.parse import urlencode
 import lxml
-import html5lib
 import json
-from Bio import Entrez
+import docx # this package get text form word document
+import re
+
 
 # %%
 # read in excel list of publications, store as journal data frame and abstract data frame
@@ -17,19 +16,7 @@ journal_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Re
 
 abstract_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name=1, header=0)
 
-
-# %%
-# Explore the journal paper data frame
-journal_df.info()
-
-# %%
-# Explore the abstract paper data frame
-abstract_df.info()
-
-# %%
-# the type of the DOI column is pandas series
-type(journal_df.DOI)
-
+#%%
 doi_list = journal_df.DOI.tolist()
 # %%
 # Produce a data frame of failed doi in publication tracker
@@ -52,6 +39,78 @@ Weird_doi_DF.dropna(how = 'all')
 
 
 
+
+#%%
+# Add the summary paragrph into publication tracker
+# https://python-docx.readthedocs.io/en/latest/ 
+
+word_master = docx.Document('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications List Master - LATEST.docx')
+all_paragraphs = word_master.paragraphs
+
+try:
+    from xml.etree.cElementTree import XML
+except ImportError:
+    from xml.etree.ElementTree import XML
+import zipfile
+import io
+import requests    
+
+def get_docx_text(path):
+    """Take the path of a docx file as argument, return the text in unicode."""
+
+    WORD_NAMESPACE = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+    PARA = WORD_NAMESPACE + 'p'
+    TEXT = WORD_NAMESPACE + 't'
+
+    document = zipfile.ZipFile(path)
+    xml_content = document.read('word/document.xml')
+    document.close()
+    tree = XML(xml_content)
+
+    paragraphs = []
+    for paragraph in tree.getiterator(PARA):
+        texts = [n.text for n in paragraph.getiterator(TEXT) if n.text]
+        if texts:
+            paragraphs.append(''.join(texts))
+
+    return '\n\n'.join(paragraphs)
+
+para_list = get_docx_text('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications List Master - LATEST.docx').split('\n\n')
+
+for para in para_list:
+    if para.startswith('http'):
+        index = para_list.index(para)
+        para_list[index-1] = para_list[index-1]+para_list[index]
+        para_list.remove(para_list[index-1])
+#print(para_list)
+
+
+summary_dict = {'ref':[], 'summary':[]}
+
+for para in para_list:
+    if re.search(r'(2\d{3})', para) != None:
+        summary_dict['ref'].append(para)
+    else:
+        if para == " ":
+            continue
+        else:
+            summary_dict['summary'].append(para)
+summary_df = pd.DataFrame(summary_dict)
+#%%
+# slice out the shortened author data as a merge anchor
+Shortened_Author = []
+for item in summary_df['ref']:
+    index = item.find('(2')
+    Shortened_Author.append(item[:index])
+summary_df['Shortened Author'] = Shortened_Author
+summary_df
+
+
+#%%
+new_journal_df = journal_df.merge(summary_df, on='Shortened Author')
+new_journal_df
+
+
 # %%
 # Scrap out the citation detail 
 # https://stackoverflow.com/questions/69428700/how-to-scrape-full-paper-citation-from-google-scholar-search-results-python
@@ -59,14 +118,7 @@ Weird_doi_DF.dropna(how = 'all')
 # https://stackoverflow.com/questions/62414552/scraping-citation-text-from-pubmed-search-results-with-beautifulsoup-and-python
 # https://nexus.od.nih.gov/all/2015/08/31/pmid-vs-pmcid-whats-the-difference/
 
-
-journal_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name = 0, header=0)
-abstract_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name=1, header=0)
-
 headers  = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'}
-
-
-query = journal_df.Title[i].rstrip().lstrip().replace(' ','+')
 
 # get citation function
 def get_citation(query):
@@ -83,10 +135,16 @@ def get_citation(query):
     end_index = apa_orig.index('(')
     modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ')
     print(modify)
+    # print the summary
+    
+
+for i in range(len(new_journal_df.Title)):
+    query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+')
+    get_citation(query)
+    print(new_journal_df['summary'][i])
 
 
-
-
+# TODO: get only published output as the new_journal_df
 
 #%%
 # See if biopython will work. Biopython is PubMed's public API

@@ -1,5 +1,6 @@
 #%%
 # Import Relevant libraries
+from typing import Concatenate
 import pandas as pd # this library organises data frame 
 import openpyxl # this library open excel file
 import requests 
@@ -9,36 +10,15 @@ import json
 import docx # this package get text form word document
 import re
 
+#%%
+pd.set_option('display.max_row', None)
+pd.set_option('display.max_column', None)
 
 # %%
 # read in excel list of publications, store as journal data frame and abstract data frame
 journal_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name = 0, header=0)
 
 abstract_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name=1, header=0)
-
-#%%
-doi_list = journal_df.DOI.tolist()
-# %%
-# Produce a data frame of failed doi in publication tracker
-weird_doi = {"Study":[], "url":[]}
-
-for url, i in zip(journal_df.DOI, range(len(journal_df.DOI))):
-    if type(url) is str:
-        if url.startswith('http'):
-            continue
-        else:
-            weird_doi["Study"].append(journal_df['Concatenated'][i])
-            weird_doi["url"].append(url)
-    else:
-        weird_doi["Study"].append(journal_df['Concatenated'][i])
-        weird_doi["url"].append(url)
-pd.set_option('display.max_colwidth', 400)
-Weird_doi_DF = pd.DataFrame(weird_doi)
-Weird_doi_DF.dropna(how = 'all')
-
-
-
-
 
 #%%
 # Add the summary paragrph into publication tracker
@@ -82,9 +62,11 @@ for para in para_list:
         index = para_list.index(para)
         para_list[index-1] = para_list[index-1]+para_list[index]
         para_list.remove(para_list[index-1])
-#print(para_list)
+print(para_list)
 
 
+#TODO: The anchor Starttitle do not form one to one relationship. The para_list also still contain url entry
+#%%
 summary_dict = {'ref':[], 'summary':[]}
 
 for para in para_list:
@@ -96,21 +78,40 @@ for para in para_list:
         else:
             summary_dict['summary'].append(para)
 summary_df = pd.DataFrame(summary_dict)
+
 #%%
-# slice out the shortened author data as a merge anchor
-Shortened_Author = []
+
+# create anchor to merge summary dataframe with journal dataframe
+Starttitle = []
 for item in summary_df['ref']:
     index = item.find('(2')
-    Shortened_Author.append(item[:index])
-summary_df['Shortened Author'] = Shortened_Author
-summary_df
-
+    Starttitle.append(item[index+8: index+8+59])
+summary_df['Starttitle'] = Starttitle
+#%%
+Starttitle2 = []
+for item in journal_df['Title']:
+    if type(item) is float:
+        Starttitle2.append(item)
+    else:
+        Starttitle2.append(item.lstrip()[0:59])
+journal_df['Starttitle'] = Starttitle2
 
 #%%
-new_journal_df = journal_df.merge(summary_df, on='Shortened Author')
-new_journal_df
+# merge two dataframes based on the anchor "Starttitle"
+
+#TODO: still not working
+new_journal_df = journal_df.merge(summary_df, on='Starttitle')
+new_journal_df.drop(columns=['Starttitle'], inplace = True)
+new_journal_df.info()
 
 
+
+
+
+
+
+
+ 
 # %%
 # Scrap out the citation detail 
 # https://stackoverflow.com/questions/69428700/how-to-scrape-full-paper-citation-from-google-scholar-search-results-python
@@ -135,16 +136,64 @@ def get_citation(query):
     end_index = apa_orig.index('(')
     modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ')
     print(modify)
-    # print the summary
-    
 
+    
+#%% Write into Doc before formating
 for i in range(len(new_journal_df.Title)):
     query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+')
     get_citation(query)
-    print(new_journal_df['summary'][i])
+    #print(new_journal_df['summary'][i])
 
 
-# TODO: get only published output as the new_journal_df
+
+
+#%%
+# Create functions to filter columms
+import inquirer
+
+status_question = [
+    inquirer.List('Status',
+                message='What is the status of the article?',
+                choices=journal_df['Status'].unique().tolist()
+    )
+]
+# select status filter
+selected_status_option = inquirer.prompt(status_question)
+
+
+
+#%%
+# select technology to "LMS"
+technology_option = journal_df["Technology"].unique()
+selected_technology_option = input('selected from the list')
+
+# Generate filtered dataframe
+selected_filter = ( journal_df['Status'] == selected_status_option & journal_df['Technology'] == selected_technology_option )
+selected_df = journal_df[selected_filter]
+
+
+
+
+# %%
+# Produce a data frame of failed doi in publication tracker
+doi_list = journal_df.DOI.tolist()
+weird_doi = {"Study":[], "url":[]}
+
+for url, i in zip(journal_df.DOI, range(len(journal_df.DOI))):
+    if type(url) is str:
+        if url.startswith('http'):
+            continue
+        else:
+            weird_doi["Study"].append(journal_df['Concatenated'][i])
+            weird_doi["url"].append(url)
+    else:
+        weird_doi["Study"].append(journal_df['Concatenated'][i])
+        weird_doi["url"].append(url)
+pd.set_option('display.max_colwidth', 400)
+Weird_doi_DF = pd.DataFrame(weird_doi)
+Weird_doi_DF.dropna(how = 'all')
+
+
 
 #%%
 # See if biopython will work. Biopython is PubMed's public API
@@ -306,3 +355,12 @@ for i in range(0, 110, 10):
 # understand how to parse out APA citation
 # structure of a URL: scheme://netloc/path;parameters?query#fragment
 # What is percent-encoded queries? Percent-encoding, also known as URL encoding, is a method to encode arbitrary data in a Uniform Resource Identifier (URI) using only the limited US-ASCII characters legal within a URI.
+
+#%%
+import urllib2
+
+for i in range(17):
+    urllib2.urlopen('https://www.hostelworld.com/')
+
+
+# %%

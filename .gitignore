@@ -5,6 +5,10 @@ post/
 pre/
 venv/
 
-# Ignore writings
+# Ignore large files. These should us git-lfs to control
 *.pdf
 *.docx
+*.xlsx
+*.csv
+*.pptx
+*.mp4

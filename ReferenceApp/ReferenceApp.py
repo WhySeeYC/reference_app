@@ -148,17 +148,27 @@ def get_citation(query):
     modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ')
     print(modify)
 
-    
 #%% Write into Doc before formating
+#TODO: improve userbility of the get citation function
+problem_entries={'Description':[], 'Entry':[]}
 for i in range(len(new_journal_df.Title)):
-    query = new_journal_df.Title[i].rstrip().lstrip().replace(' '' ','+')
-    get_citation(query)
-    #print(new_journal_df['summary'][i])
+    try:
+        query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+')
 
+        try:
+            get_citation(query)
+            print(new_journal_df['summary'][i])
+        except:
+            problem_entries['Description'].append('Not Searchable')
+            problem_entries['Entry'].append(new_journal_df.Title[i])
 
-
+    except:
+        problem_entries['Description'].append('No Title')
+        problem_entries['Entry'].append(new_journal_df.Title[i])
+pd.DataFrame(problem_entries)
 
 #%%
+#TODO: build app functions
 # Create functions to filter columms
 import inquirer
 

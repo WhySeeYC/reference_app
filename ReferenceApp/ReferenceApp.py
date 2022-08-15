@@ -1,6 +1,5 @@
 #%%
 # Import Relevant libraries
-from typing import Concatenate
 import pandas as pd # this library organises data frame 
 import openpyxl # this library open excel file
 import requests 
@@ -13,16 +12,19 @@ import re
 #%%
 pd.set_option('display.max_row', None)
 pd.set_option('display.max_column', None)
+pd.set_option('display.width', 1000)
 
 # %%
 # read in excel list of publications, store as journal data frame and abstract data frame
 journal_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name = 0, header=0)
 
+# %% 
 abstract_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name=1, header=0)
 
 #%%
 # Add the summary paragrph into publication tracker
 # https://python-docx.readthedocs.io/en/latest/ 
+# Problem were found when: the para_list still contains url entry. This was solved by manually fixing the word document of the breakage paragraph.
 
 word_master = docx.Document('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications List Master - LATEST.docx')
 all_paragraphs = word_master.paragraphs
@@ -62,10 +64,8 @@ for para in para_list:
         index = para_list.index(para)
         para_list[index-1] = para_list[index-1]+para_list[index]
         para_list.remove(para_list[index-1])
-print(para_list)
+# print(para_list)
 
-
-#TODO: The anchor Starttitle do not form one to one relationship. The para_list also still contain url entry
 #%%
 summary_dict = {'ref':[], 'summary':[]}
 
@@ -82,33 +82,44 @@ summary_df = pd.DataFrame(summary_dict)
 #%%
 
 # create anchor to merge summary dataframe with journal dataframe
+# specialChar= '!#$%^&*()-/'
+
 Starttitle = []
 for item in summary_df['ref']:
-    index = item.find('(2')
-    Starttitle.append(item[index+8: index+8+59])
+    index = item.find(').')
+    slice = item[index+2: index+2+60].lstrip() # slice out a section that is more than 50 characters and cut the white space at the begining
+    Starttitle.append(slice[0:50].lower().replace('-', ' ').replace('/', ' ').replace(',', ' ').replace('–', ' ')) # store the first 50 character into the Starttitle column
 summary_df['Starttitle'] = Starttitle
-#%%
-Starttitle2 = []
-for item in journal_df['Title']:
-    if type(item) is float:
-        Starttitle2.append(item)
-    else:
-        Starttitle2.append(item.lstrip()[0:59])
-journal_df['Starttitle'] = Starttitle2
 
-#%%
+Starttitle2 = []
+filt_df = journal_df[(journal_df['Status'] == 'Published') | (journal_df['Status'] == 'Accepted')]
+for item in filt_df['Title']:
+    if type(item) is float:
+        Starttitle2.append(item.lower().replace('-', ' ').replace('/', ' ').replace(',', ' ').replace('–', ' '))
+    else:
+        Starttitle2.append(item.lstrip()[0:50].lower().replace('-', ' ').replace('/', ' ').replace(',', ' ').replace('–', ' '))
+filt_df['Starttitle'] = Starttitle2
+
 # merge two dataframes based on the anchor "Starttitle"
 
-#TODO: still not working
-new_journal_df = journal_df.merge(summary_df, on='Starttitle')
-new_journal_df.drop(columns=['Starttitle'], inplace = True)
-new_journal_df.info()
+new_journal_df = filt_df.merge(summary_df, how='outer')
+new_journal_df
+
+#%%
+# Slice out the unmatching entries
 
 
+# filt= new_journal_df.dropna(axis = 0, how='any', subset=['Concatenated', 'Starttitle', 'ref', 'summary'])
+# new_journal_df[~new_journal_df.index.isin(filt.index)][['Concatenated', 'Starttitle', 'ref', 'summary']]
 
 
-
-
+# ['Borlotti, A., et al. (2022). The additive value of cardiovascular magnetic resonance in convalescent COVID-19 patients. Frontiers in Cardiovascular Medicine, 9:854750. https://doi.org/10.3389/fcvm.2022.854750',
+#  'Harrison, S. A., et al. (2021). Safety, Tolerability, and Biologic Activity of AXA1125 and AXA1957 in Subjects With Nonalcoholic Fatty Liver Disease. The American Journal of Gastroenterology. Advance online publication. https://doi.org/10.14309/ajg.0000000000001375',
+#  'Nanashima, A., et al. (2021). A 3D Quantitative MRC Modeling Images Detected Case of Intrahepatic Biliary Stricture Diseases. Case Reports in Gastroenterology, 15:680–688. https://doi.org/10.1159/000518020',
+#  'Bagur, A. T., et al. (2020). Pancreas Segmentation-Derived Biomarkers: Volume and Shape Metrics in the UK Biobank Imaging Study. Medical Image Understanding and Analysis. MIUA 2020. Communications in Computer and Information Science, vol 1248. https://doi.org/10.1007/978-3-030-52791-4_11',
+#  'Ralli, G. P., et al. (2020). Segmentation of the Biliary Tree from MRCP Images via the Monogenic Signal. Medical Image Understanding and Analysis. MIUA 2020. Communications in Computer and Information Science, vol 1248. https://doi.org/10.1007/978-3-030-5279',
+#  'Banerjee, R., et al. (2015). Evidence of a Direct Effect of Myocardial Steatosis on LV Hypertrophy and Diastolic Dysfunction in Adult and Adolescent Obesity. JACC: Cardiovascular Imaging, 8(12), 1468–1470. https://doi.org/10.1016/j.jcmg.2014.12.019',
+#  'Rial, B., et al. (2011). Rapid quantification of myocardial lipid content in humans using single breath hold 1H MRS at 3 Tesla. Magnetic Resonance in Medicine, 66(3), 619–624. https://doi.org/10.1002/mrm.23011']
 
 
  
@@ -140,7 +151,7 @@ def get_citation(query):
     
 #%% Write into Doc before formating
 for i in range(len(new_journal_df.Title)):
-    query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+')
+    query = new_journal_df.Title[i].rstrip().lstrip().replace(' '' ','+')
     get_citation(query)
     #print(new_journal_df['summary'][i])
 

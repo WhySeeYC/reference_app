@@ -134,6 +134,7 @@ headers  = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit
 
 # get citation function
 def get_citation(query):
+    query = 
     url = 'https://pubmed.ncbi.nlm.nih.gov/?term='+query
     response = requests.get(url, headers=headers)
     soup = bs(response.text, features='lxml') # this return the lxml page of the initial search (search from title)
@@ -141,20 +142,25 @@ def get_citation(query):
     # first_article = soup.select_one('article', class_ = 'full-docsum') the function that select the article element is not necessary because not all article fulfill the class full-docsum
     """
     pmid = soup.find('span', class_ = "docsum-pmid").get_text(strip = True) # get the pmid(unique id assigned to that article)
+    """
+    Error: 'NoneType' object has no attribute 'get_text': 2 counts
+    """
+
     second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' 
     second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
     soup2 = second_response.json() # render the response in json format
     apa_orig = soup2['apa']['orig'] # slice out the apa formatted citation
     start_index = apa_orig.index('.,')
+    """
+    Error: substring not found: 3 counts
+    """
     end_index = apa_orig.index('(')
     modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
     """
     # offical APA style provides all authors, Perspectum's master publication will just give the first author. Therefore, it is a combination of MLA style and APA style.
     """
     print(modify)
-#print(get_citation(query))
-
-
+print(get_citation(query))
 
 
 #%% Write into Doc before formating

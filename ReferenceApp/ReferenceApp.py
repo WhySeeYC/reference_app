@@ -134,7 +134,6 @@ headers  = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit
 
 # get citation function
 def get_citation(query):
-    query = 
     url = 'https://pubmed.ncbi.nlm.nih.gov/?term='+query
     response = requests.get(url, headers=headers)
     soup = bs(response.text, features='lxml') # this return the lxml page of the initial search (search from title)
@@ -161,6 +160,20 @@ def get_citation(query):
     """
     print(modify)
 print(get_citation(query))
+
+#%%
+# getting citation with DOI
+
+response = requests.get('https://doi.org/10.3748/wjg.v27.i7.609', headers=headers) # find alternative solution for Imajo paper
+soup = bs(response.text, features='lxml')
+soup.find('span', id='citation_html').get_text(strip = True)
+
+#%%
+response = requests.get('https://doi.org/10.2196/19189', headers=headers) # find alternative solution for Tonev paper
+soup = bs(response.text, features='lxml')
+print(soup)
+#soup.find('span', id='citation_html').get_text(strip = True)
+
 
 
 #%% Write into Doc before formating

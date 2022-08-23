@@ -159,25 +159,32 @@ def get_citation(query):
     # offical APA style provides all authors, Perspectum's master publication will just give the first author. Therefore, it is a combination of MLA style and APA style.
     """
     print(modify)
-print(get_citation(query))
+
 
 #%%
 # getting citation with DOI
+def get_citation_doi(search_doi):
+    url = 'https://pubmed.ncbi.nlm.nih.gov/?term='+search_doi
+    response = requests.get(url, headers=headers) # find alternative solution for Imajo paper
+    soup = bs(response.text, features='lxml')
+    pmid = soup.find('span', class_ = "docsum-pmid").get_text(strip = True)
+    second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' 
+    second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
+    soup2 = second_response.json() # render the response in json format
+    apa_orig = soup2['apa']['orig'] # slice out the apa formatted citation
+    start_index = apa_orig.index('.,')
+    end_index = apa_orig.index('(')
+    modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
+    print(modify)
 
-response = requests.get('https://doi.org/10.3748/wjg.v27.i7.609', headers=headers) # find alternative solution for Imajo paper
-soup = bs(response.text, features='lxml')
-soup.find('span', id='citation_html').get_text(strip = True)
-
-#%%
-response = requests.get('https://doi.org/10.2196/19189', headers=headers) # find alternative solution for Tonev paper
-soup = bs(response.text, features='lxml')
-print(soup)
-#soup.find('span', id='citation_html').get_text(strip = True)
-
+"""
+search_doi = new_journal_df.DOI[48].replace('https://doi.org/', '')
+"""
 
 
 #%% Write into Doc before formating
-#TODO: improve userbility of the get citation function
+#FIXME: improve userbility of the get citation function
+# TODO: incoporate get_citation_doi function
 
 problem_entries={'Description':[], 'Entry':[]}
 for i in range(len(new_journal_df.Title)):

@@ -50,8 +50,8 @@ def get_docx_text(path):
     tree = XML(xml_content)
 
     paragraphs = []
-    for paragraph in tree.getiterator(PARA):
-        texts = [n.text for n in paragraph.getiterator(TEXT) if n.text]
+    for paragraph in tree.iter(PARA):
+        texts = [n.text for n in paragraph.iter(TEXT) if n.text]
         if texts:
             paragraphs.append(''.join(texts))
 
@@ -136,20 +136,30 @@ headers  = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit
 def get_citation(query):
     url = 'https://pubmed.ncbi.nlm.nih.gov/?term='+query
     response = requests.get(url, headers=headers)
-    soup = bs(response.text, features='lxml')
-    first_article = soup.select_one('article', class_ = 'full-docsum')
-    pmid = first_article.find('span', class_ = "docsum-pmid").get_text(strip = True)
-    second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' # get the pmid and actually head in the paper's Pubmed page
-    second_response = requests.get(second_url, headers=headers)
+    soup = bs(response.text, features='lxml') # this return the lxml page of the initial search (search from title)
+    """
+    # first_article = soup.select_one('article', class_ = 'full-docsum') the function that select the article element is not necessary because not all article fulfill the class full-docsum
+    """
+    pmid = soup.find('span', class_ = "docsum-pmid").get_text(strip = True) # get the pmid(unique id assigned to that article)
+    second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' 
+    second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
     soup2 = second_response.json() # render the response in json format
-    apa_orig = soup2['apa']['orig']
+    apa_orig = soup2['apa']['orig'] # slice out the apa formatted citation
     start_index = apa_orig.index('.,')
     end_index = apa_orig.index('(')
-    modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ')
+    modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
+    """
+    # offical APA style provides all authors, Perspectum's master publication will just give the first author. Therefore, it is a combination of MLA style and APA style.
+    """
     print(modify)
+#print(get_citation(query))
+
+
+
 
 #%% Write into Doc before formating
 #TODO: improve userbility of the get citation function
+
 problem_entries={'Description':[], 'Entry':[]}
 for i in range(len(new_journal_df.Title)):
     try:
@@ -161,11 +171,24 @@ for i in range(len(new_journal_df.Title)):
         except:
             problem_entries['Description'].append('Not Searchable')
             problem_entries['Entry'].append(new_journal_df.Title[i])
-
+            """ 
+            # 59 studeis could not be searched with the get_citation function (pre 23 August)
+            #  5 studies could not be searched with the get_citation function (23 August)
+            """
+        
     except:
         problem_entries['Description'].append('No Title')
         problem_entries['Entry'].append(new_journal_df.Title[i])
+        """
+        # 7 studeis did not have title
+        """
+        
+        
 pd.DataFrame(problem_entries)
+To_inspect = pd.DataFrame(problem_entries)
+To_inspect
+
+
 
 #%%
 #TODO: build app functions
@@ -384,4 +407,111 @@ for i in range(17):
     urllib2.urlopen('https://www.hostelworld.com/')
 
 
+# %%
+
+name = ' Joanna '
+# 'My friend' + name + 'is coming for dinner tonight.'
+
+#'My friend %s is coming for dinner tonight.' % name
+"My friend `(name)` is coming for dinner tonight."
+# %%
+
+
+total = 0
+for num in range(1,6):
+    total+=num
+print(total)
+# %%
+
+
+numbers = [num for num in range(5) if 0 < num < 4 ]
+
+count = 0
+result = 20
+
+while count < len(numbers):
+    result = result - numbers[count]
+    count += 1
+
+print(result)
+# %%
+def process_word(word):
+    output = list(word)
+    output.reverse()
+    new_word = "".join(output)
+    print(new_word)
+
+result = process_word('monkey')
+# %%
+def calc_factorial(n):
+    fact = 1
+    for num in range(2, n + 1):
+        fact *= num
+    return fact
+
+
+def my_function(numbers):
+    my_container = []
+    for num in numbers:
+        my_container.append(calc_factorial(num))
+    return my_container[::-1]
+
+
+result = my_function((1,2,3))
+print(result)
+# %%
+
+dog_size = int(input('How big is the dog? '))
+
+if dog_size > 75:
+    print('That is a big dog')
+
+elif dog_size < 10:
+    print('That dog could fit in my pocket')
+
+elif dog_size < 25:
+    print('That is a small dog')
+
+else:
+    print('That is an average dog')
+# %%
+my_dict = {
+'dog' : 'billy',
+'cat' : 'pepe'
+}
+
+result = [v.capitalize() for k,v in my_dict.items()]
+# %%
+
+my_fruit = {"apple", "banana", "orange"}
+
+my_fruit.pop()
+
+print(my_fruit)
+#%%
+
+menu = ('croissant', 'coffee', 'juice')
+
+menu[1] = ['tea', 'juice']
+# %%
+my_dict = {
+'Anita': [
+{'Biology': 'A', 'Chemistry': 'A*', 'Physics': 'B'},
+{'English': 'B', 'Literature': 'B', 'French': 'C'},
+{'PE': 'A', 'Music': 'A', 'Food Tech': 'A'}
+]
+}
+
+for i in my_dict.keys():
+    # result = type(my_dict[i])
+    result = set(my_dict[i][2].values())
+
+print(result)
+# %%
+
+import requests
+
+response = requests.get('http://api.open-notify.org/astros.json')
+data = response.ok()
+print(data)
 # %%

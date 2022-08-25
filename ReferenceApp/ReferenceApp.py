@@ -1,5 +1,6 @@
 #%%
 # Import Relevant libraries
+from textwrap import indent
 import pandas as pd # this library organises data frame 
 import openpyxl # this library open excel file
 import requests 
@@ -8,6 +9,9 @@ import lxml
 import json
 import docx # this package get text form word document
 import re
+from docx import Document
+from docx.shared import RGBColor
+from docx.shared import Cm
 
 #%%
 pd.set_option('display.max_row', None)
@@ -103,7 +107,7 @@ filt_df['Starttitle'] = Starttitle2
 # merge two dataframes based on the anchor "Starttitle"
 
 new_journal_df = filt_df.merge(summary_df, how='outer')
-new_journal_df
+# new_journal_df.to_excel('Published and Accepted Studies with Summary.xlsx', sheet_name='To fix match')
 
 #%%
 # Slice out the unmatching entries
@@ -154,11 +158,12 @@ def get_citation(query):
     Error: substring not found: 3 counts
     """
     end_index = apa_orig.index('(')
+    global modify # define global varible 
     modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
     """
     # offical APA style provides all authors, Perspectum's master publication will just give the first author. Therefore, it is a combination of MLA style and APA style.
     """
-    print(modify)
+    # print(modify)
 
 
 #%%
@@ -174,48 +179,117 @@ def get_citation_doi(search_doi):
     apa_orig = soup2['apa']['orig'] # slice out the apa formatted citation
     start_index = apa_orig.index('.,')
     end_index = apa_orig.index('(')
+    global modify
     modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
-    print(modify)
+    #print(modify)
 
 """
 search_doi = new_journal_df.DOI[48].replace('https://doi.org/', '')
 """
 
 
+#%%
+# defiine styles functions
+def study_style(modify):
+    run = document.add_paragraph(style = 'List Number').add_run(modify)
+    font = run.font
+    font.bold = True
+    font.name = 'Proxima Noma'
+    font.color.rgb = RGBColor(0x01, 0x42, 0x7E) # FIXME: make this chooseable
+
+def summary_style(modify):
+    paragraph = document.add_paragraph()
+    paragraph_format = paragraph.paragraph_format
+    paragraph_format.left_indent = Cm(0.63)
+    run = paragraph.add_run(modify)
+    font = run.font
+    font.name = 'Proxima Noma'
+    font.color.rgb = RGBColor(0x00, 0x00, 0x00) # FIXME: make this chooseable
+
 #%% Write into Doc before formating
 #FIXME: improve userbility of the get citation function
-# TODO: incoporate get_citation_doi function
+
+
+document = Document()
+section = document.sections[0]
+header = section.header
+paragraph = header.paragraphs[0]
+logo_run = paragraph.add_run()
+logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(8)) # FIXME: make this chooseable
+heading = input('Type in the document title:')
+document.add_heading(heading, 0)
 
 problem_entries={'Description':[], 'Entry':[]}
+
 for i in range(len(new_journal_df.Title)):
     try:
         query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+')
 
         try:
+            # Write the study reference in to word with defined style: Proxima Nova, Perspectum Blue, Bold
             get_citation(query)
-            print(new_journal_df['summary'][i])
+            study_style(modify)
+            summary_style(new_journal_df['summary'][i])
+            print('written')
         except:
-            problem_entries['Description'].append('Not Searchable')
-            problem_entries['Entry'].append(new_journal_df.Title[i])
-            """ 
-            # 59 studeis could not be searched with the get_citation function (pre 23 August)
-            #  5 studies could not be searched with the get_citation function (23 August)
-            """
+        # incoporate get_citation_doi function
+            try:
+                search_doi = new_journal_df.DOI[i].replace('https://doi.org/', '')
+                get_citation_doi(search_doi)
+                study_style(modify)
+                summary_style(new_journal_df['summary'][i])
+                print('written')
+                """ 
+                59 studeis could not be searched with the get_citation function (pre 23 August)
+                5 studies could not be searched with the get_citation function (23 August)
+                """
+            except:
+                pass
+                problem_entries['Description'].append('Not Searchable')
+                problem_entries['Entry'].append(new_journal_df.iloc[i])
+                """
+                9 studies not searchable(25 August)
+                """
         
     except:
-        problem_entries['Description'].append('No Title')
-        problem_entries['Entry'].append(new_journal_df.Title[i])
+        study_style(new_journal_df.ref[i])
+        summary_style(new_journal_df.summary[i])
+        print('written')
+        # problem_entries['Description'].append('No Title')
+        # problem_entries['Entry'].append(new_journal_df.Title[i])
         """
-        # 7 studeis did not have title
+        7 studeis did not have title (23 August)
         """
         
         
 pd.DataFrame(problem_entries)
 To_inspect = pd.DataFrame(problem_entries)
-To_inspect
+try:
+    document.add_paragraph(To_inspect)
+except:
+    print('Pandas DF not a paragraph')
+document.save('demo1.docx')
 
 
 
+#%%
+# Write into word doc
+from docx import Document
+from docx.shared import RGBColor
+document = Document()
+section = document.sections[0]
+header = section.header
+paragraph = header.paragraphs[0]
+logo_run = paragraph.add_run()
+logo = logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(7)) # FIXME: make this chooseable
+# heading = input('Type in the document title:')
+# document.add_heading(heading, 0)
+
+run = document.add_paragraph().add_run('reference of the study')
+font = run.font
+font.name = 'Proxima Noma'
+font.color.rgb = RGBColor(0x01, 0x42, 0x7E)
+document.save('demo1.docx')
 #%%
 #TODO: build app functions
 # Create functions to filter columms

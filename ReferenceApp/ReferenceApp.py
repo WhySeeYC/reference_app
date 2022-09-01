@@ -12,6 +12,7 @@ import re
 from docx import Document
 from docx.shared import RGBColor
 from docx.shared import Cm
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 #%%
 pd.set_option('display.max_row', None)
@@ -195,16 +196,18 @@ def study_style(modify):
     font = run.font
     font.bold = True
     font.name = 'Proxima Noma'
-    font.color.rgb = RGBColor(0x01, 0x42, 0x7E) # FIXME: make this chooseable
+    # RGB_tuple = input('Please type in the 3 RGB values for the reference paragraph:')
+    font.color.rgb = RGBColor(0x01, 0x42, 0x7E) # FIXME: make this chooseable color picker 
+
 
 def summary_style(modify):
     paragraph = document.add_paragraph()
     paragraph_format = paragraph.paragraph_format
-    paragraph_format.left_indent = Cm(0.63)
+    paragraph_format.left_indent = Cm(0.63) # make the indentation the same as previous one
     run = paragraph.add_run(modify)
     font = run.font
     font.name = 'Proxima Noma'
-    font.color.rgb = RGBColor(0x00, 0x00, 0x00) # FIXME: make this chooseable
+    font.color.rgb = RGBColor(0x00, 0x00, 0x00)
 
 #%% Write into Doc before formating
 #FIXME: improve userbility of the get citation function
@@ -212,27 +215,39 @@ def summary_style(modify):
 
 document = Document()
 section = document.sections[0]
+
+# set margin to narrow
+section.left_margin, section.right_margin, section.top_margin, section.bottom_margin = Cm(1.77), Cm(1.77), Cm(1.77), Cm(1.77) 
+
+# set header with logo
 header = section.header
 paragraph = header.paragraphs[0]
+paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 logo_run = paragraph.add_run()
-logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(8)) # FIXME: make this chooseable
+# logo_path = input('Please choose a Logo path:')
+# logo_run.add_picture(logo_path, width=Cm(6))
+logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) # 
+
+# allow user to put in document title
 heading = input('Type in the document title:')
 document.add_heading(heading, 0)
 
+
 problem_entries={'Description':[], 'Entry':[]}
 
+# Writing reference and summary into the document
 for i in range(len(new_journal_df.Title)):
     try:
         query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+')
 
         try:
-            # Write the study reference in to word with defined style: Proxima Nova, Perspectum Blue, Bold
+            # get citation with get_citation function
             get_citation(query)
             study_style(modify)
             summary_style(new_journal_df['summary'][i])
             print('written')
         except:
-        # incoporate get_citation_doi function
+            # get citation with get_citation_doi function
             try:
                 search_doi = new_journal_df.DOI[i].replace('https://doi.org/', '')
                 get_citation_doi(search_doi)
@@ -245,6 +260,7 @@ for i in range(len(new_journal_df.Title)):
                 """
             except:
                 pass
+                # record problematic entry
                 problem_entries['Description'].append('Not Searchable')
                 problem_entries['Entry'].append(new_journal_df.iloc[i])
                 """
@@ -252,44 +268,63 @@ for i in range(len(new_journal_df.Title)):
                 """
         
     except:
+        # writing in reference and summary from the unidentified study entry
         study_style(new_journal_df.ref[i])
         summary_style(new_journal_df.summary[i])
         print('written')
-        # problem_entries['Description'].append('No Title')
-        # problem_entries['Entry'].append(new_journal_df.Title[i])
         """
         7 studeis did not have title (23 August)
         """
         
         
-pd.DataFrame(problem_entries)
-To_inspect = pd.DataFrame(problem_entries)
-try:
-    document.add_paragraph(To_inspect)
-except:
-    print('Pandas DF not a paragraph')
+print(pd.DataFrame(problem_entries))
 document.save('demo1.docx')
+
+
+
+
 
 
 
 #%%
-# Write into word doc
+# Test wriiting into Doc
+
 from docx import Document
 from docx.shared import RGBColor
+from docx.enum.text import WD_ALIGN_PARAGRAPH # import the python-docx property setting WD_ALIGN_PARAGRAPH
+
 document = Document()
 section = document.sections[0]
+section.left_margin, section.right_margin, section.top_margin, section.bottom_margin = Cm(1.77), Cm(1.77), Cm(1.77), Cm(1.77) # set margin to narrow
 header = section.header
 paragraph = header.paragraphs[0]
+paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 logo_run = paragraph.add_run()
-logo = logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(7)) # FIXME: make this chooseable
-# heading = input('Type in the document title:')
-# document.add_heading(heading, 0)
+logo = logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) 
 
-run = document.add_paragraph().add_run('reference of the study')
-font = run.font
+
+ref_run = document.add_paragraph(style = 'List Number').add_run(modify)
+font = ref_run.font
+font.bold = True
 font.name = 'Proxima Noma'
-font.color.rgb = RGBColor(0x01, 0x42, 0x7E)
+font.color.rgb = RGBColor(0x01, 0x42, 0x7E) 
+
+paragraph = document.add_paragraph()
+paragraph_format = paragraph.paragraph_format
+paragraph_format.left_indent = Cm(0.63)
+sum_run = paragraph.add_run('reference of the study')
+font = sum_run.font
+font.name = 'Proxima Noma'
+
 document.save('demo1.docx')
+
+
+
+
+
+
+
+
 #%%
 #TODO: build app functions
 # Create functions to filter columms

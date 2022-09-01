@@ -276,11 +276,9 @@ for i in range(len(new_journal_df.Title)):
         7 studeis did not have title (23 August)
         """
         
-        
-print(pd.DataFrame(problem_entries))
-document.save('demo1.docx')
-
-
+document.save('demo1.docx')        
+To_inspect = pd.DataFrame(problem_entries)
+To_inspect
 
 
 
@@ -327,6 +325,23 @@ document.save('demo1.docx')
 
 #%%
 #TODO: build app functions
+"""
+import csv from publication tracker
+Select Technology (multiple choice)
+Select Sttatus (multiple choice)
+
+Preview a DataFrame to the next tab
+drop rows from data frame (optional)
+Preview final dataframe for the studies to be write into word file
+
+Input Title
+select Logo for the document
+Select color for reference paragraph
+Gwnerate
+
+"""
+
+
 # Create functions to filter columms
 import inquirer
 

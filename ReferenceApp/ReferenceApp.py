@@ -326,17 +326,22 @@ document.save('demo1.docx')
 #%%
 #TODO: build app functions
 """
+Input:
 import csv from publication tracker
 Select Technology (multiple choice)
 Select Sttatus (multiple choice)
 
+Select:
 Preview a DataFrame to the next tab
 drop rows from data frame (optional)
 Preview final dataframe for the studies to be write into word file
 
+Style:
 Input Title
 select Logo for the document
 Select color for reference paragraph
+
+Output:
 Gwnerate
 
 """

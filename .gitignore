@@ -4,3 +4,12 @@
 post/
 pre/
 venv/
+*.csv
+*.png
+*.docx
+*.xlsx
+*.pptx
+*.mp4
+*.pdf
+*.jpeg
+

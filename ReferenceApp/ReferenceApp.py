@@ -107,7 +107,8 @@ filt_df['Starttitle'] = Starttitle2
 
 # merge two dataframes based on the anchor "Starttitle"
 
-new_journal_df = filt_df.merge(summary_df, how='outer')
+new_journal_df = filt_df.merge(summary_df, how='outer').sort_values(by=['Publication Year'], axis=0, ascending=False, ignore_index=True)
+
 # new_journal_df.to_excel('Published and Accepted Studies with Summary.xlsx', sheet_name='To fix match')
 
 #%%
@@ -211,6 +212,7 @@ def summary_style(modify):
 
 #%% Write into Doc before formating
 #FIXME: improve userbility of the get citation function
+#FIXME: sorting descending from dataframe did not work
 
 
 document = Document()
@@ -241,14 +243,7 @@ for i in range(len(new_journal_df.Title)):
         query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+')
 
         try:
-            # get citation with get_citation function
-            get_citation(query)
-            study_style(modify)
-            summary_style(new_journal_df['summary'][i])
-            print('written')
-        except:
             # get citation with get_citation_doi function
-            try:
                 search_doi = new_journal_df.DOI[i].replace('https://doi.org/', '')
                 get_citation_doi(search_doi)
                 study_style(modify)
@@ -258,11 +253,19 @@ for i in range(len(new_journal_df.Title)):
                 59 studeis could not be searched with the get_citation function (pre 23 August)
                 5 studies could not be searched with the get_citation function (23 August)
                 """
+
+        except:
+            try:
+                # get citation with get_citation function
+                get_citation(query)
+                study_style(modify)
+                summary_style(new_journal_df['summary'][i])
+                print('written')
             except:
                 pass
                 # record problematic entry
                 problem_entries['Description'].append('Not Searchable')
-                problem_entries['Entry'].append(new_journal_df.iloc[i])
+                problem_entries['Entry'].append(new_journal_df.Title[i])
                 """
                 9 studies not searchable(25 August)
                 """
@@ -280,7 +283,14 @@ document.save('demo1.docx')
 To_inspect = pd.DataFrame(problem_entries)
 To_inspect
 
-
+"""
+Utility and cost evaluation of multiparametric magnetic resonance imaging for the assessment of non-alcoholic fatty liver disease.
+Prospective study of change in liver function and fat in patients with colorectal liver metastases undergoing preoperative chemotherapy: protocol for the CLiFF Study
+Noninvasive imaging assessment of portal hypertension.
+Diagnostic accuracy of elastography, and magnetic resonance imaging in patients with NAFLD: a systematic review and meta-analysis.
+Associations Between Quantitative MRI Metrics and Clinical Risk Scores in Children and Young Adults With Autoimmune Liver Disease.
+Ectopic fat and body composition in type-2 diabetes: Results from the UK Biobank
+"""
 
 
 
@@ -497,7 +507,7 @@ def get_author_year_publi_info(authors_tag):
     years = []
     publication = []
     authors = []
-    for i in range(len(authors_tag))
+    for i in range(len(authors_tag)):
         authortag_text = (author_tag[i].text).split()
         year = int(re.search(r'\d+', authors_tag[i].text).group())
         years.append(year)

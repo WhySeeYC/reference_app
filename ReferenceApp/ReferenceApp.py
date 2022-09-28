@@ -97,17 +97,18 @@ for item in summary_df['ref']:
 summary_df['Starttitle'] = Starttitle
 
 Starttitle2 = []
-filt_df = journal_df[(journal_df['Status'] == 'Published') | (journal_df['Status'] == 'Accepted')]
-for item in filt_df['Title']:
+# filt_df = journal_df[(journal_df['Status'] == 'Published') | (journal_df['Status'] == 'Accepted')]
+for item in journal_df['Title']:
     if type(item) is float:
-        Starttitle2.append(item.lower().replace('-', ' ').replace('/', ' ').replace(',', ' ').replace('–', ' '))
+        Starttitle2.append(item)
     else:
         Starttitle2.append(item.lstrip()[0:50].lower().replace('-', ' ').replace('/', ' ').replace(',', ' ').replace('–', ' '))
-filt_df['Starttitle'] = Starttitle2
+journal_df['Starttitle'] = Starttitle2
 
 # merge two dataframes based on the anchor "Starttitle"
 
-new_journal_df = filt_df.merge(summary_df, how='outer').sort_values(by=['Publication Year'], axis=0, ascending=False, ignore_index=True)
+new_journal_df = journal_df.merge(summary_df, how='outer')
+# .sort_values(by=['Publication Year'], axis=0, ascending=False, ignore_index=True)
 
 # new_journal_df.to_excel('Published and Accepted Studies with Summary.xlsx', sheet_name='To fix match')
 
@@ -143,39 +144,74 @@ def get_citation(query):
     url = 'https://pubmed.ncbi.nlm.nih.gov/?term='+query
     response = requests.get(url, headers=headers)
     soup = bs(response.text, features='lxml') # this return the lxml page of the initial search (search from title)
-    """
-    # first_article = soup.select_one('article', class_ = 'full-docsum') the function that select the article element is not necessary because not all article fulfill the class full-docsum
-    """
-    pmid = soup.find('span', class_ = "docsum-pmid").get_text(strip = True) # get the pmid(unique id assigned to that article)
-    """
-    Error: 'NoneType' object has no attribute 'get_text': 2 counts
-    """
-
+    redirect = soup.find('div', class_='article-page')
+    if redirect != None:
+        # For soup2, direct into article
+        pmid = redirect['data-article-pmid']
+        #print(pmid)
+    else:
+        first_article = soup.find('article', attrs={"class":"full-docsum", "data-rel-pos":"1"})
+        if first_article != None:
+            # For soup and soup3, match with explanation box available.
+            # For soup4, match but no explanation box, get the 1st position article.
+            # all of these scenarios, find the 1st position article
+            pmid = first_article.find('span', class_='docsum-pmid').get_text()
+            #print(pmid)
+            # the issue with this logic is that we assume the 1st article is the best match
+        else:
+            # For soup5, no matach at all
+            print('not searchable. use DOI')
     second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' 
     second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
     soup2 = second_response.json() # render the response in json format
     apa_orig = soup2['apa']['orig'] # slice out the apa formatted citation
-    start_index = apa_orig.index('.,')
-    """
-    Error: substring not found: 3 counts
-    """
+    start_index = apa_orig.index('.,')  # FIXME: substring not found
     end_index = apa_orig.index('(')
     global modify # define global varible 
     modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
-    """
-    # offical APA style provides all authors, Perspectum's master publication will just give the first author. Therefore, it is a combination of MLA style and APA style.
-    """
+    return modify
     # print(modify)
 
-<<<<<<< Updated upstream
-=======
 #%%
 # Tested get_citation() function. 10/87 studies could not be searched through the get_citation() function.
 for i in range(len(new_journal_df['Title'])):
-    try:
-        get_citation(new_journal_df['Title'][i].strip()) # strip the space at both end of the tile to reduce conflic
-    except:
-        print(new_journal_df['Title'][i])
+    get_citation(new_journal_df['Title'][i].strip()) # strip the space at both end of the tile to reduce conflict
+    print(i, 'study had been found')
+
+
+
+
+    
+#%% 
+# Test on 5 dataset, represent 5 scenarios
+# soup: match, 1 article found. [Multiparametric magnetic resonance for the non-invasive diagnosis of liver disease.]
+# soup2: match, directly into article page.[ Sex-specific differences in hepatic fat oxidation and synthesis may explain the higher propensity for NAFLD in men.]
+# soup3: match, 2 articel found. [ Characterisation of liver fat in the UK Biobank cohort.]
+# soup4: match, no explanation box. [Multiparametric magnetic resonance imaging for early detection of diffuse liver disease.]
+# soup5: no match at all. [ The Effect of Multiparametric Magnetic Resonance Imaging in Standard of Care for Non-alcoholic Fatty Liver Disease: Protocol for a Randomised Control Trial.]
+
+
+
+redirect = soup.find('div', class_='article-page')
+if redirect != None:
+    # For soup2, direct into article
+    pmid = redirect['data-article-pmid']
+    print(pmid)
+else:
+    first_article = soup.find('article', attrs={"class":"full-docsum", "data-rel-pos":"1"})
+    if first_article != None:
+        # For soup and soup3, match with explanation box available.
+        # For soup4, match but no explanation box, get the 1st position article.
+        # all of these scenarios, find the 1st position article
+        pmid = first_article.find('span', class_='docsum-pmid').get_text()
+        print(pmid)
+        # the issue with this logic is that we assume the 1st article is the best match
+    else:
+        # For soup5, no matach at all
+        print('not searchable. use DOI')
+
+
+
 
 #%% [markdown]
 ### There are the 10 studies could not be searched through the get_citation() function.
@@ -206,7 +242,6 @@ for i in range(len(new_journal_df['Title'])):
 # nan\
 
 # 27 Sep testing, the function performance gone worst
->>>>>>> Stashed changes
 
 #%%
 # getting citation with DOI
@@ -236,7 +271,7 @@ def study_style(modify):
     run = document.add_paragraph(style = 'List Number').add_run(modify)
     font = run.font
     font.bold = True
-    font.name = 'Proxima Noma'
+    font.name = 'Proxima Nova'
     # RGB_tuple = input('Please type in the 3 RGB values for the reference paragraph:')
     font.color.rgb = RGBColor(0x01, 0x42, 0x7E) # FIXME: make this chooseable color picker 
 
@@ -247,7 +282,7 @@ def summary_style(modify):
     paragraph_format.left_indent = Cm(0.63) # make the indentation the same as previous one
     run = paragraph.add_run(modify)
     font = run.font
-    font.name = 'Proxima Noma'
+    font.name = 'Proxima Nova'
     font.color.rgb = RGBColor(0x00, 0x00, 0x00)
 
 #%% Write into Doc before formating

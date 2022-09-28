@@ -161,6 +161,7 @@ def get_citation(query):
         else:
             # For soup5, no matach at all
             print('not searchable. use DOI')
+            exit() # temporarily get out of the function
     second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' #FIXME: UnboundLocalError: local variable 'pmid' referenced before assignment
     second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
     soup2 = second_response.json() # render the response in json format

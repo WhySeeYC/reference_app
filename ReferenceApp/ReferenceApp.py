@@ -167,6 +167,46 @@ def get_citation(query):
     """
     # print(modify)
 
+<<<<<<< Updated upstream
+=======
+#%%
+# Tested get_citation() function. 10/87 studies could not be searched through the get_citation() function.
+for i in range(len(new_journal_df['Title'])):
+    try:
+        get_citation(new_journal_df['Title'][i].strip()) # strip the space at both end of the tile to reduce conflic
+    except:
+        print(new_journal_df['Title'][i])
+
+#%% [markdown]
+### There are the 10 studies could not be searched through the get_citation() function.
+# It will be useful to split output from interactive window and inspect with web-browser
+
+# Associations Between Quantitative MRI Metrics and Clinical Risk Scores in Children and Young Adults With Autoimmune Liver Disease.\
+#  Utility and cost evaluation of multiparametric magnetic resonance imaging for the assessment of non-alcoholic fatty liver disease.\
+# These two were solved with modified function
+# ```
+# tmp = soup.find('button', class_="citation-button citation-dialog-trigger")
+# pmid = tmp['data-all-citations-url']
+# second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid
+
+# ```
+# However, with using the modified function along, the other studies which was able to be found with original functions could not be found with the modified function.
+
+# Another issue is that the `soup.find('span, class_='docsum-pmid')` could match multiple studies' pmid
+
+
+# Quantitative multiparametric MRI can aid NASH diagnosis in a Japanese cohort.  \ not work with modified 
+# The Effect of Multiparametric Magnetic Resonance Imaging in Standard of Care for Non-alcoholic Fatty Liver Disease: Protocol for a Randomised Control Trial.\ not work with modified 
+#  Multiparametric magnetic resonance imaging for early detection of diffuse liver disease.\ not work with modified 
+
+# nan\
+# nan\
+# nan\
+# nan\
+# nan\
+
+# 27 Sep testing, the function performance gone worst
+>>>>>>> Stashed changes
 
 #%%
 # getting citation with DOI

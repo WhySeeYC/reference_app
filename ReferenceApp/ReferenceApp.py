@@ -158,22 +158,22 @@ def get_citation(query):
             pmid = first_article.find('span', class_='docsum-pmid').get_text()
             #print(pmid)
             # the issue with this logic is that we assume the 1st article is the best match
+            second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/'
+            second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
+            soup2 = second_response.json() # render the response in json format
+            apa_orig = soup2['apa']['orig'] # slice out the apa formatted 
+            try:
+                start_index = apa_orig.index('.,')  # some studies have single author
+                end_index = apa_orig.index('(')
+                modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
+            except:
+                modify = apa_orig
+            return modify
         else:
-            # For soup5, no matach at all
-            print('not searchable. use DOI')
-            exit() # temporarily get out of the function
-    second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' #FIXME: UnboundLocalError: local variable 'pmid' referenced before assignment
-    second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
-    soup2 = second_response.json() # render the response in json format
-    apa_orig = soup2['apa']['orig'] # slice out the apa formatted 
-    try:
-        start_index = apa_orig.index('.,')  # some studies have single author
-        end_index = apa_orig.index('(')
-        modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
-    except:
-        modify = apa_orig
-    return modify
-    # print(modify)
+            # For soup5, no matach at all, try search with DOI
+            raise Exception('not searchable. use DOI') # use exception message to allow trying the get_citation_doi() function
+            exit()
+            
 
 #%%
 # Tested get_citation() function. 10/87 studies could not be searched through the get_citation() function.
@@ -245,6 +245,11 @@ else:
 # nan\
 
 # 27 Sep testing, the function performance gone worst
+# 28 Sep testing. There are 3 studies unsearchable with title. The DOIs are attached.
+# https://doi.org/10.2196/19189
+# https://doi.org/10.3748/wjg.v27.i7.609
+# https://doi.org/10.1007/s12072-022-10331-w
+
 
 #%%
 # getting citation with DOI
@@ -259,13 +264,11 @@ def get_citation_doi(search_doi):
     apa_orig = soup2['apa']['orig'] # slice out the apa formatted citation
     start_index = apa_orig.index('.,')
     end_index = apa_orig.index('(')
-    global modify
     modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
-    #print(modify)
+    return modify
 
-"""
-search_doi = new_journal_df.DOI[48].replace('https://doi.org/', '')
-"""
+
+
 
 
 #%%

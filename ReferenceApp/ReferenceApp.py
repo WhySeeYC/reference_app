@@ -161,14 +161,16 @@ def get_citation(query):
         else:
             # For soup5, no matach at all
             print('not searchable. use DOI')
-    second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' 
+    second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' #FIXME: UnboundLocalError: local variable 'pmid' referenced before assignment
     second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
     soup2 = second_response.json() # render the response in json format
-    apa_orig = soup2['apa']['orig'] # slice out the apa formatted citation
-    start_index = apa_orig.index('.,')  # FIXME: substring not found
-    end_index = apa_orig.index('(')
-    global modify # define global varible 
-    modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
+    apa_orig = soup2['apa']['orig'] # slice out the apa formatted 
+    try:
+        start_index = apa_orig.index('.,')  # some studies have single author
+        end_index = apa_orig.index('(')
+        modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
+    except:
+        modify = apa_orig
     return modify
     # print(modify)
 

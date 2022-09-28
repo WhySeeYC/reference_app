@@ -148,7 +148,18 @@ def get_citation(query):
     if redirect != None:
         # For soup2, direct into article
         pmid = redirect['data-article-pmid']
-        #print(pmid)
+        second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/'
+        second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
+        soup2 = second_response.json() # render the response in json format
+        apa_orig = soup2['apa']['orig'] # slice out the apa formatted 
+        try:
+            start_index = apa_orig.index('.,')  # some studies have single author
+            end_index = apa_orig.index('(')
+            modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
+            return modify
+        except:
+            modify = apa_orig
+            return modify
     else:
         first_article = soup.find('article', attrs={"class":"full-docsum", "data-rel-pos":"1"})
         if first_article != None:
@@ -166,9 +177,10 @@ def get_citation(query):
                 start_index = apa_orig.index('.,')  # some studies have single author
                 end_index = apa_orig.index('(')
                 modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
+                return modify
             except:
                 modify = apa_orig
-            return modify
+                return modify
         else:
             # For soup5, no matach at all, try search with DOI
             raise Exception('not searchable. use DOI') # use exception message to allow trying the get_citation_doi() function
@@ -176,11 +188,34 @@ def get_citation(query):
             
 
 #%%
-# Tested get_citation() function. 10/87 studies could not be searched through the get_citation() function.
-for i in range(len(new_journal_df['Title'])):
-    get_citation(new_journal_df['Title'][i].strip()) # strip the space at both end of the tile to reduce conflict
-    print(i, 'study had been found')
+# getting citation with DOI
+def get_citation_doi(search_doi):
+    url = 'https://pubmed.ncbi.nlm.nih.gov/?term='+search_doi
+    response = requests.get(url, headers=headers) # find alternative solution for Imajo paper
+    soup = bs(response.text, features='lxml')
+    pmid = soup.find('span', class_ = "docsum-pmid").get_text(strip = True)
+    second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' 
+    second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
+    soup2 = second_response.json() # render the response in json format
+    apa_orig = soup2['apa']['orig'] # slice out the apa formatted citation
+    start_index = apa_orig.index('.,')
+    end_index = apa_orig.index('(')
+    modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
+    return modify
 
+
+
+
+#%%
+# Tested function utility
+for i in range(len(new_journal_df['Title'])):
+    try: 
+        get_citation(new_journal_df['Title'][i].strip()) # strip the space at both end of the tile to reduce conflict
+        print(i, 'study found with get_citation function')
+    except: 
+        search_doi = new_journal_df.DOI[i].replace('https://doi.org/', '')
+        get_citation_doi(search_doi)
+        print(i, 'study found with get_citation_doi function')
 
 
 
@@ -249,27 +284,7 @@ else:
 # https://doi.org/10.2196/19189
 # https://doi.org/10.3748/wjg.v27.i7.609
 # https://doi.org/10.1007/s12072-022-10331-w
-
-
-#%%
-# getting citation with DOI
-def get_citation_doi(search_doi):
-    url = 'https://pubmed.ncbi.nlm.nih.gov/?term='+search_doi
-    response = requests.get(url, headers=headers) # find alternative solution for Imajo paper
-    soup = bs(response.text, features='lxml')
-    pmid = soup.find('span', class_ = "docsum-pmid").get_text(strip = True)
-    second_url = 'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/citations/' 
-    second_response = requests.get(second_url, headers=headers) # request to get in the paper's Pubmed page
-    soup2 = second_response.json() # render the response in json format
-    apa_orig = soup2['apa']['orig'] # slice out the apa formatted citation
-    start_index = apa_orig.index('.,')
-    end_index = apa_orig.index('(')
-    modify = apa_orig.replace(apa_orig[start_index+3:end_index], 'et al. ') 
-    return modify
-
-
-
-
+# After using exception message to connect two functions in one for loop. The 3 strudies are able to be found with get_citation_doi function.
 
 #%%
 # defiine styles functions
@@ -324,54 +339,28 @@ for i in range(len(new_journal_df.Title)):
         query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+')
 
         try:
+            # get citation with get_citation function
+                get_citation(query)
+                study_style(modify)
+                summary_style(new_journal_df['summary'][i])
+                print(i, 'written')
+        except:
             # get citation with get_citation_doi function
                 search_doi = new_journal_df.DOI[i].replace('https://doi.org/', '')
                 get_citation_doi(search_doi)
                 study_style(modify)
                 summary_style(new_journal_df['summary'][i])
-                print('written')
-                """ 
-                59 studeis could not be searched with the get_citation function (pre 23 August)
-                5 studies could not be searched with the get_citation function (23 August)
-                """
-
-        except:
-            try:
-                # get citation with get_citation function
-                get_citation(query)
-                study_style(modify)
-                summary_style(new_journal_df['summary'][i])
-                print('written')
-            except:
-                pass
-                # record problematic entry
-                problem_entries['Description'].append('Not Searchable')
-                problem_entries['Entry'].append(new_journal_df.Title[i])
-                """
-                9 studies not searchable(25 August)
-                """
-        
+                print(i, 'written')
     except:
         # writing in reference and summary from the unidentified study entry
-        study_style(new_journal_df.ref[i])
-        summary_style(new_journal_df.summary[i])
-        print('written')
-        """
-        7 studeis did not have title (23 August)
-        """
+        study_style(new_journal_df.ref[i]) #FIXME 28 Sep: TypeError: 'float' object is not iterable 
+        try:
+            summary_style(new_journal_df.summary[i])
+            print(i, 'written')
+        except:
+            print(new_journal_df['Starttitle'][i])
         
 document.save('demo1.docx')        
-To_inspect = pd.DataFrame(problem_entries)
-To_inspect
-
-"""
-Utility and cost evaluation of multiparametric magnetic resonance imaging for the assessment of non-alcoholic fatty liver disease.
-Prospective study of change in liver function and fat in patients with colorectal liver metastases undergoing preoperative chemotherapy: protocol for the CLiFF Study
-Noninvasive imaging assessment of portal hypertension.
-Diagnostic accuracy of elastography, and magnetic resonance imaging in patients with NAFLD: a systematic review and meta-analysis.
-Associations Between Quantitative MRI Metrics and Clinical Risk Scores in Children and Young Adults With Autoimmune Liver Disease.
-Ectopic fat and body composition in type-2 diabetes: Results from the UK Biobank
-"""
 
 
 

@@ -307,7 +307,6 @@ def summary_style(modify):
     font.color.rgb = RGBColor(0x00, 0x00, 0x00)
 
 #%% Write into Doc before formating
-#FIXME: improve userbility of the get citation function
 #FIXME: sorting descending from dataframe did not work
 
 
@@ -336,29 +335,35 @@ problem_entries={'Description':[], 'Entry':[]}
 # Writing reference and summary into the document
 for i in range(len(new_journal_df.Title)):
     try:
-        query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+')
+        query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+') # this prepare the title to be searchable
         try:
             # get citation with get_citation function
             modify = get_citation(query) # define the variable modify again from the returned value of get_citation function
             study_style(modify)
-            summary_style(new_journal_df['summary'][i]) #FIXME 29 Sep: TypeError: 'float' object is not iterable, suspect no summary
+            if pd.notna(new_journal_df['summary'][i]) is True:
+                summary_style(new_journal_df['summary'][i])
+            else:
+                print('no summary for study:', new_journal_df.Title[i])
             print(i, 'written')
         except:
             # get citation with get_citation_doi function
             search_doi = new_journal_df.DOI[i].replace('https://doi.org/', '')
             modify = get_citation_doi(search_doi)
             study_style(modify)
-            summary_style(new_journal_df['summary'][i])
+            if pd.notna(new_journal_df['summary'][i]) is True:
+                summary_style(new_journal_df['summary'][i])
+            else:
+                print('no summary for study:', new_journal_df.Title[i])
             print(i, 'written')
     except:
-        print('Can not get citation for the study', new_journal_df.Title[i])
-        # writing in reference and summary from the unidentified study entry
-        study_style(new_journal_df.ref[i]) 
-        try:
-            summary_style(new_journal_df.summary[i])
-            print(i, 'written')
-        except:
-            print(new_journal_df['Starttitle'][i])
+        print('Can not get citation for the study in index:', i)
+        if pd.isna(new_journal_df.Title[i]) is True:
+            print('There is no title for the study')
+        else:
+            if (new_journal_df.Status[i].strip() == 'Published') or (new_journal_df.Status[i] == 'Accepted'):
+                print('Published but not match with pubmed') # published, not match on pubmed
+            else:
+                print('Please check the status of the study:', new_journal_df.Status[i]) # not published
         
 document.save('demo1.docx')        
 

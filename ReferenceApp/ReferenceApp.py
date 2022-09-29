@@ -13,6 +13,7 @@ from docx import Document
 from docx.shared import RGBColor
 from docx.shared import Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from datetime import date
 
 #%%
 pd.set_option('display.max_row', None)
@@ -375,8 +376,10 @@ document.save('demo1.docx')
 from docx import Document
 from docx.shared import RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH # import the python-docx property setting WD_ALIGN_PARAGRAPH
+from docx.enum.style import WD_STYLE
 
 document = Document()
+style = document.styles
 section = document.sections[0]
 section.left_margin, section.right_margin, section.top_margin, section.bottom_margin = Cm(1.77), Cm(1.77), Cm(1.77), Cm(1.77) # set margin to narrow
 header = section.header
@@ -385,11 +388,17 @@ paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 logo_run = paragraph.add_run()
 logo = logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) 
 
+footer = section.footer
+paragraph = footer.paragraphs[0]
+today = datetime.date.today().strftime('%d/%m/%Y')
+contact_info = 'info@perspectum.com | www.perspectum.com | U.S.: (+1) 857 321 8675 | U.K.: (+44) 1865 655343'
+page_num = 'page X of Y'  # paragraph.add_run(style[WD_STYLE.PAGE_NUMBER]) #FIXME: find ways to auto get page number 
+foot_run = paragraph.add_run(today +'\t'+ contact_info + '\t' + page_num) #FIXME: make fotter text smaller
 
 ref_run = document.add_paragraph(style = 'List Number').add_run(modify)
 font = ref_run.font
 font.bold = True
-font.name = 'Proxima Noma'
+font.name = 'Proxima Nova'
 font.color.rgb = RGBColor(0x01, 0x42, 0x7E) 
 
 paragraph = document.add_paragraph()
@@ -397,9 +406,9 @@ paragraph_format = paragraph.paragraph_format
 paragraph_format.left_indent = Cm(0.63)
 sum_run = paragraph.add_run('reference of the study')
 font = sum_run.font
-font.name = 'Proxima Noma'
+font.name = 'Proxima Nova'
 
-document.save('demo1.docx')
+document.save('test.docx')
 
 
 

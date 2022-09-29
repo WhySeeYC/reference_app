@@ -337,23 +337,23 @@ problem_entries={'Description':[], 'Entry':[]}
 for i in range(len(new_journal_df.Title)):
     try:
         query = new_journal_df.Title[i].rstrip().lstrip().replace(' ','+')
-
         try:
             # get citation with get_citation function
-                get_citation(query)
-                study_style(modify)
-                summary_style(new_journal_df['summary'][i])
-                print(i, 'written')
+            modify = get_citation(query) # define the variable modify again from the returned value of get_citation function
+            study_style(modify)
+            summary_style(new_journal_df['summary'][i]) #FIXME 29 Sep: TypeError: 'float' object is not iterable, suspect no summary
+            print(i, 'written')
         except:
             # get citation with get_citation_doi function
-                search_doi = new_journal_df.DOI[i].replace('https://doi.org/', '')
-                get_citation_doi(search_doi)
-                study_style(modify)
-                summary_style(new_journal_df['summary'][i])
-                print(i, 'written')
+            search_doi = new_journal_df.DOI[i].replace('https://doi.org/', '')
+            modify = get_citation_doi(search_doi)
+            study_style(modify)
+            summary_style(new_journal_df['summary'][i])
+            print(i, 'written')
     except:
+        print('Can not get citation for the study', new_journal_df.Title[i])
         # writing in reference and summary from the unidentified study entry
-        study_style(new_journal_df.ref[i]) #FIXME 28 Sep: TypeError: 'float' object is not iterable 
+        study_style(new_journal_df.ref[i]) 
         try:
             summary_style(new_journal_df.summary[i])
             print(i, 'written')

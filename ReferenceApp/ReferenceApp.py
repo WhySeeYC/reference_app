@@ -28,9 +28,7 @@ journal_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Re
 abstract_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name=1, header=0)
 
 #%%
-# Add the summary paragrph into publication tracker
-# https://python-docx.readthedocs.io/en/latest/ 
-# Problem were found when: the para_list still contains url entry. This was solved by manually fixing the word document of the breakage paragraph.
+# Add the summary paragrph into publication tracker. https://python-docx.readthedocs.io/en/latest/ 
 
 word_master = docx.Document('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications List Master - LATEST.docx')
 all_paragraphs = word_master.paragraphs
@@ -72,6 +70,9 @@ for para in para_list:
         para_list.remove(para_list[index-1])
 # print(para_list)
 
+
+
+
 #%%
 summary_dict = {'ref':[], 'summary':[]}
 
@@ -85,10 +86,11 @@ for para in para_list:
             summary_dict['summary'].append(para)
 summary_df = pd.DataFrame(summary_dict)
 
-#%%
 
+
+
+#%%
 # create anchor to merge summary dataframe with journal dataframe
-# specialChar= '!#$%^&*()-/'
 
 Starttitle = []
 for item in summary_df['ref']:
@@ -98,7 +100,6 @@ for item in summary_df['ref']:
 summary_df['Starttitle'] = Starttitle
 
 Starttitle2 = []
-# filt_df = journal_df[(journal_df['Status'] == 'Published') | (journal_df['Status'] == 'Accepted')]
 for item in journal_df['Title']:
     if type(item) is float:
         Starttitle2.append(item)
@@ -107,27 +108,8 @@ for item in journal_df['Title']:
 journal_df['Starttitle'] = Starttitle2
 
 # merge two dataframes based on the anchor "Starttitle"
-
 new_journal_df = journal_df.merge(summary_df, how='outer')
-# .sort_values(by=['Publication Year'], axis=0, ascending=False, ignore_index=True)
-
 # new_journal_df.to_excel('Published and Accepted Studies with Summary.xlsx', sheet_name='To fix match')
-
-#%%
-# Slice out the unmatching entries
-
-
-# filt= new_journal_df.dropna(axis = 0, how='any', subset=['Concatenated', 'Starttitle', 'ref', 'summary'])
-# new_journal_df[~new_journal_df.index.isin(filt.index)][['Concatenated', 'Starttitle', 'ref', 'summary']]
-
-
-# ['Borlotti, A., et al. (2022). The additive value of cardiovascular magnetic resonance in convalescent COVID-19 patients. Frontiers in Cardiovascular Medicine, 9:854750. https://doi.org/10.3389/fcvm.2022.854750',
-#  'Harrison, S. A., et al. (2021). Safety, Tolerability, and Biologic Activity of AXA1125 and AXA1957 in Subjects With Nonalcoholic Fatty Liver Disease. The American Journal of Gastroenterology. Advance online publication. https://doi.org/10.14309/ajg.0000000000001375',
-#  'Nanashima, A., et al. (2021). A 3D Quantitative MRC Modeling Images Detected Case of Intrahepatic Biliary Stricture Diseases. Case Reports in Gastroenterology, 15:680–688. https://doi.org/10.1159/000518020',
-#  'Bagur, A. T., et al. (2020). Pancreas Segmentation-Derived Biomarkers: Volume and Shape Metrics in the UK Biobank Imaging Study. Medical Image Understanding and Analysis. MIUA 2020. Communications in Computer and Information Science, vol 1248. https://doi.org/10.1007/978-3-030-52791-4_11',
-#  'Ralli, G. P., et al. (2020). Segmentation of the Biliary Tree from MRCP Images via the Monogenic Signal. Medical Image Understanding and Analysis. MIUA 2020. Communications in Computer and Information Science, vol 1248. https://doi.org/10.1007/978-3-030-5279',
-#  'Banerjee, R., et al. (2015). Evidence of a Direct Effect of Myocardial Steatosis on LV Hypertrophy and Diastolic Dysfunction in Adult and Adolescent Obesity. JACC: Cardiovascular Imaging, 8(12), 1468–1470. https://doi.org/10.1016/j.jcmg.2014.12.019',
-#  'Rial, B., et al. (2011). Rapid quantification of myocardial lipid content in humans using single breath hold 1H MRS at 3 Tesla. Magnetic Resonance in Medicine, 66(3), 619–624. https://doi.org/10.1002/mrm.23011']
 
 
  
@@ -186,10 +168,11 @@ def get_citation(query):
             # For soup5, no matach at all, try search with DOI
             raise Exception('not searchable. use DOI') # use exception message to allow trying the get_citation_doi() function
             exit()
-            
+
+
 
 #%%
-# getting citation with DOI
+# getting citation with DOI function
 def get_citation_doi(search_doi):
     url = 'https://pubmed.ncbi.nlm.nih.gov/?term='+search_doi
     response = requests.get(url, headers=headers) # find alternative solution for Imajo paper
@@ -218,10 +201,6 @@ for i in range(len(new_journal_df['Title'])):
         get_citation_doi(search_doi)
         print(i, 'study found with get_citation_doi function')
 
-
-
-    
-#%% 
 # Test on 5 dataset, represent 5 scenarios
 # soup: match, 1 article found. [Multiparametric magnetic resonance for the non-invasive diagnosis of liver disease.]
 # soup2: match, directly into article page.[ Sex-specific differences in hepatic fat oxidation and synthesis may explain the higher propensity for NAFLD in men.]
@@ -376,37 +355,62 @@ document.save('demo1.docx')
 from docx import Document
 from docx.shared import RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH # import the python-docx property setting WD_ALIGN_PARAGRAPH
-from docx.enum.style import WD_STYLE
+from docx.enum.style import WD_STYLE_TYPE
 
-document = Document()
-style = document.styles
-section = document.sections[0]
-section.left_margin, section.right_margin, section.top_margin, section.bottom_margin = Cm(1.77), Cm(1.77), Cm(1.77), Cm(1.77) # set margin to narrow
-header = section.header
-paragraph = header.paragraphs[0]
-paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-logo_run = paragraph.add_run()
-logo = logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) 
+document = docx.Document(docx = '/Users/yi-chunwang/Work_Repo/ReferenceApp/Publication Template.docx') # use template
+style = document.styles 
+# lstyle = styles.add_style('List Number', WD_STYLE_TYPE.PARAGRAPH, builtin=True)
+"""
+To access the style in the template:
+from docx.enum.style import WD_STYLE_TYPE
+document = docx.Document(docx = '/Users/yi-chunwang/Work_Repo/ReferenceApp/Publication Template.docx') # use template
+styles = document.styles
+paragraph_styles = [s for s in styles if s.type == WD_STYLE_TYPE.PARAGRAPH]
+for style in paragraph_styles:
+    print(style.name)
+"""
+# section = document.sections[0]
+# section.left_margin, section.right_margin, section.top_margin, section.bottom_margin = Cm(1.77), Cm(1.77), Cm(1.77), Cm(1.77) # set margin to narrow
+# header = section.header
+# paragraph = header.paragraphs[0]
+# paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+# logo_run = paragraph.add_run()
+# logo = logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) 
 
-footer = section.footer
-paragraph = footer.paragraphs[0]
-today = datetime.date.today().strftime('%d/%m/%Y')
-contact_info = 'info@perspectum.com | www.perspectum.com | U.S.: (+1) 857 321 8675 | U.K.: (+44) 1865 655343'
-page_num = 'page X of Y'  # paragraph.add_run(style[WD_STYLE.PAGE_NUMBER]) #FIXME: find ways to auto get page number 
-foot_run = paragraph.add_run(today +'\t'+ contact_info + '\t' + page_num) #FIXME: make fotter text smaller
+# footer = section.footer
+# paragraph = footer.paragraphs[0]
+# today = datetime.date.today().strftime('%d/%m/%Y')
+# contact_info = 'info@perspectum.com | www.perspectum.com | U.S.: (+1) 857 321 8675 | U.K.: (+44) 1865 655343'
+# page_num = 'page X of Y'  # paragraph.add_run(style[WD_STYLE.PAGE_NUMBER]) #FIXME: find ways to auto get page number 
+# foot_run = paragraph.add_run(today +'\t'+ contact_info + '\t' + page_num) #FIXME: make fotter text smaller https://python-docx.readthedocs.io/en/latest/user/hdrftr.html
 
-ref_run = document.add_paragraph(style = 'List Number').add_run(modify)
+# ref_run = document.add_paragraph(style = 'List Number').add_run(modify)
+ref_run = document.add_paragraph(style = 'List Paragraph').add_run('reference of the study blabla ')
 font = ref_run.font
 font.bold = True
 font.name = 'Proxima Nova'
 font.color.rgb = RGBColor(0x01, 0x42, 0x7E) 
 
-paragraph = document.add_paragraph()
-paragraph_format = paragraph.paragraph_format
-paragraph_format.left_indent = Cm(0.63)
-sum_run = paragraph.add_run('reference of the study')
+paragraph = document.add_paragraph(style = 'Normal (Web)')
+# paragraph_format = paragraph.paragraph_format
+# paragraph_format.left_indent = Cm(0.63)
+sum_run = paragraph.add_run('summary pojedopvn')
 font = sum_run.font
 font.name = 'Proxima Nova'
+
+
+# duplicate
+ref_run = document.add_paragraph(style = 'List Paragraph').add_run('reference of the study2')
+font = ref_run.font
+font.bold = True
+font.name = 'Proxima Nova'
+font.color.rgb = RGBColor(0x01, 0x42, 0x7E) 
+
+paragraph = document.add_paragraph(style = 'Normal (Web)')
+sum_run = paragraph.add_run('summary2')
+font = sum_run.font
+font.name = 'Proxima Nova'
+
 
 document.save('test.docx')
 

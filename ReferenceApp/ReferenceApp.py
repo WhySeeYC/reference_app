@@ -269,7 +269,7 @@ else:
 #%%
 # defiine styles functions
 def study_style(modify):
-    run = document.add_paragraph(style = 'List Number').add_run(modify)
+    run = document.add_paragraph(style = 'List Paragraph').add_run(modify)
     font = run.font
     font.bold = True
     font.name = 'Proxima Nova'
@@ -278,9 +278,9 @@ def study_style(modify):
 
 
 def summary_style(modify):
-    paragraph = document.add_paragraph()
-    paragraph_format = paragraph.paragraph_format
-    paragraph_format.left_indent = Cm(0.63) # make the indentation the same as previous one
+    paragraph = document.add_paragraph(style = 'Normal (Web)')
+    # paragraph_format = paragraph.paragraph_format -> controlled by template
+    # paragraph_format.left_indent = Cm(0.63) # make the indentation the same as previous one
     run = paragraph.add_run(modify)
     font = run.font
     font.name = 'Proxima Nova'
@@ -290,27 +290,25 @@ def summary_style(modify):
 #FIXME: sorting descending from dataframe did not work
 
 
-document = Document()
+document = Document(docx = '/Users/yi-chunwang/Work_Repo/ReferenceApp/Publication Template.docx')
+style = document.styles 
+
 section = document.sections[0]
+section.left_margin, section.right_margin, section.top_margin, section.bottom_margin = Cm(1.77), Cm(1.77), Cm(1.77), Cm(1.77) # set margin to narrow
 
-# set margin to narrow
-section.left_margin, section.right_margin, section.top_margin, section.bottom_margin = Cm(1.77), Cm(1.77), Cm(1.77), Cm(1.77) 
+# # set header with logo -> this will be controled with template
+# header = section.header
+# paragraph = header.paragraphs[0]
+# paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+# logo_run = paragraph.add_run()
+# # logo_path = input('Please choose a Logo path:')
+# # logo_run.add_picture(logo_path, width=Cm(6))
+# logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) # 
 
-# set header with logo
-header = section.header
-paragraph = header.paragraphs[0]
-paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-logo_run = paragraph.add_run()
-# logo_path = input('Please choose a Logo path:')
-# logo_run.add_picture(logo_path, width=Cm(6))
-logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) # 
+# allow user to put in document title -> this will also be controled with template
+# heading = input('Type in the document title:')
+# document.add_heading(heading, 0)
 
-# allow user to put in document title
-heading = input('Type in the document title:')
-document.add_heading(heading, 0)
-
-
-problem_entries={'Description':[], 'Entry':[]}
 
 # Writing reference and summary into the document
 for i in range(len(new_journal_df.Title)):

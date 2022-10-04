@@ -6,6 +6,7 @@
 # https://medium.com/@nandinisaini021 scraping-publications-of-aerial-image-research-papers-on-google-scholar-using-python-a0dee9744728
 # https://stackoverflow.com/questions/62414552/scraping-citation-text-from-pubmed-search-results-with-beautifulsoup-and-python
 # https://nexus.od.nih.gov/all/2015/08/31/pmid-vs-pmcid-whats-the-difference/
+# Understanding stdin, stdout, stderr: https://stackoverflow.com/questions/3385201/confused-about-stdin-stdout-and-stderr
 
 
 
@@ -243,18 +244,13 @@ def study_style(modify):
     font = run.font
     font.bold = True
     font.name = 'Proxima Nova'
-    # RGB_tuple = input('Please type in the 3 RGB values for the reference paragraph:')
-    # font.color.rgb = RGBColor(0x01, 0x42, 0x7E) # FIXME: make this chooseable color picker -> the color can be controled with template read in
 
 
 def summary_style(modify):
     paragraph = document.add_paragraph(style = 'Normal (Web)')
-    # paragraph_format = paragraph.paragraph_format -> controlled by template
-    # paragraph_format.left_indent = Cm(0.63) # make the indentation the same as previous one
     run = paragraph.add_run(modify)
     font = run.font
     font.name = 'Proxima Nova'
-    # font.color.rgb = RGBColor(0x00, 0x00, 0x00)
 
 #%% Write into Doc before formating
 #Sorting descending from dataframe did not work -> sorting to be controled by input file
@@ -349,8 +345,8 @@ for style in paragraph_styles:
 # paragraph = footer.paragraphs[0]
 # today = datetime.date.today().strftime('%d/%m/%Y')
 # contact_info = 'info@perspectum.com | www.perspectum.com | U.S.: (+1) 857 321 8675 | U.K.: (+44) 1865 655343'
-# page_num = 'page X of Y'  # paragraph.add_run(style[WD_STYLE.PAGE_NUMBER]) #FIXME: find ways to auto get page number 
-# foot_run = paragraph.add_run(today +'\t'+ contact_info + '\t' + page_num) #FIXME: 
+# page_num = 'page X of Y'  # paragraph.add_run(style[WD_STYLE.PAGE_NUMBER])
+# foot_run = paragraph.add_run(today +'\t'+ contact_info + '\t' + page_num) 
 
 # ref_run = document.add_paragraph(style = 'List Number').add_run(modify)
 ref_run = document.add_paragraph(style = 'List Paragraph').add_run('reference of the study blabla ')
@@ -382,6 +378,229 @@ font.name = 'Proxima Nova'
 
 document.save('test.docx')
 
+#%%
+class Abstract(Publication):
+    copyright_year = 2021
+    def __init__(self, status, technology, disease, summary, conference): # adding a conference attrobute
+        super().__init__(status, technology, disease, summary) # this way the subclass handle the common attributes from the parent class, which is calss Publication
+        self.conference = conference
+
+abs_1 = Abstract('Accepted', 'CoverScan', 'long Covid','summary5', 'RSNA')
+abs_2 = Abstract('In prep', 'MRCP', 'PBS','summary6', 'ISMRM')
+
+
+
+abs_1.apply_copyright()
+print(abs_1.summary) # summary5Reserved for2021
+
+pub_1.apply_copyright()
+print(pub_1.summary) # summary1Reserved for2022
+
+# see the publication class' copyright year still intact
+
+
+
+#%%
+# Object Oriented Programming
+
+class Publication:
+    
+    copyright_year = 2022 
+    publication_num = 0 
+
+    def __init__(self, status, technology, disease, summary):
+        
+        self.status = status
+        self.technology = technology
+        self.disease = disease
+        self.summary = summary 
+        Publication.publication_num += 1 
+    
+    def fullinfo(self):
+        return '{} {} {} {}'.format(self.status, self.technology, self.disease, self.summary) 
+    
+    def apply_copyright(self):
+        self.summary = self.summary + 'Reserved for' + str(self.copyright_year) 
+        return self.summary
+
+    def __repr__(self):
+        return 'Study({}, {}, {})'.format(self.status, self.technology, self.disease)
+    
+
+    def __str__(self):
+        return '{} - {}'.format(self.technology, self.disease)
+
+
+    @classmethod # convert a regular method to class method
+    def set_copyright_year(cls, year): # cls is the convention
+        cls.copyright_year = str(year)
+    
+    @classmethod # provide a method that people can just add a new study by typing in string
+    def from_string(cls, pub_str): # use class method as alternative constructor for new study
+        status, technology, disease, summary = pub_str.split('_')
+        return cls(status, technology, disease, summary) # return a new instance object 
+    
+    @staticmethod # the method does not operate on the class and instance
+    def update_person(initial):
+        person = initial
+        return 'Last update by:' + person
+
+pub_1 = Publication('Published', 'LMS', 'HCC', 'summary1')
+pub_2 = Publication('Accepted', 'MRCP', 'cholangitis', 'summary2')
+print(pub_2)
+print(pub_1)
+
+
+
+#%%
+# create a SocialMedia class and inherit from Publication
+# Use this to control whether we cover the study or abstract
+class SocialMedia(Publication): 
+
+    def __init__(self, status, technology, disease, summary, CoverStudy = None):
+        super().__init__(status, technology, disease, summary)
+        if CoverStudy is None:
+            self.CoverStudy = []
+        else:
+            self.CoverStudy = CoverStudy
+    
+    def post_study(self, Study):
+        if Study not in self.CoverStudy:
+            self.CoverStudy.append(Study)
+    
+    def remove_study(self, Study):
+        if Study in self.CoverStudy:
+            self.CoverStudy.remove(Study)
+    
+    def covered_study(self):
+        for Study in self.CoverStudy:
+            print(self.fullinfo(), 'Covered-->', Study.fullinfo())
+    
+    
+
+Sol1 = SocialMedia('Posted', 'LMS', 'NASH', 'sum', [pub_1])
+print(Sol1.disease)
+Sol1.post_study(pub_2)
+Sol1.remove_study(pub_1)
+print(Sol1.covered_study())
+# # Sol1.covered_study()
+
+#%%
+
+class Publication:
+
+    def __init__(self, status, technology, disease, summary):
+        self.status = status
+        self.technology = technology
+        self.disease = disease
+
+    @property # this way we can access the summary like an attribute and change relevant attributes
+    def summary(self):
+        return 'The study has the status and technology:{}, {}'.format(self.status, self.technology)
+    
+    @property # remember we need to declare the method first 
+    def fullinfo(self):
+        return '{},{},{}'.format(self.status, self.technology, self.disease)
+    
+    @fullinfo.setter # then turn it into setter 
+    def fullinfo(self, info_value):
+        status, technology, disease = info_value.split(',')
+        self.status = status
+        self.technology = technology
+        self.disease = disease
+
+    @fullinfo.deleter # and deleter
+    def fullinfo(self):
+        print('Delete the info!')
+        self.status = None
+        self.technology = None
+        self.disease = None
+
+
+pub_3 = Publication('Accepted', 'MRCP', 'PSB', 'summary xxx')
+pub_3.fullinfo = 'Published, MRCP, cholangitis'
+
+del pub_3.fullinfo # still use it like a attribute, but it is actually deleter function
+print(pub_3.status)
+print(pub_3.technology)
+print(pub_3.disease)
+
+# print(pub_3.fullinfo())
+# # print(pub_3.coreinfo())
+
+# # say we want to change summary attribute and let the other attributes also change
+# pub_3.status = 'Published'
+# print(pub_3.status)
+# print(pub_3.summary)
+
+
+
+
+#%%
+class RefApp(wx.App):
+    pass
+
+class RefFrame(wx.Frame):
+    pass
+
+class RefPanel(wx.Panel):
+    so_far = 0 # class variable
+    def __init__(self, Button, Text, StatusBar, ContinueButton, Input, Output, ErrorM):
+        self.Button = Button
+        self.Text = Text
+        self.StatusBar = tatusBar
+        self.ContinueButton = ContinueButton
+        self.Input = Input
+        self.Output = Output
+        self.ErrorM = ErrorM # error message
+
+        RefPanel.so_far += 1 # whenever a new tab is created, the progress workflow add 1 step forward
+
+    def ErrorInfo(self):
+        return '{} {} {}'.format(self.Input, self.Output, self.ErrorM)
+    
+    def __repr__(self):
+        return 'Study({}, {})'.format(self.Text, self.Button)
+    
+
+    def __str__(self):
+        return '{} - {}'.format(self.technology, self.disease)
+    
+    def __add__(self, other):
+        return 'self.Text + self.Button'
+        NotImplemented # instead of throwing error, jsut not implement the dunder method because other object might be able to handle the dunder method's operation
+
+    pass
+
+# panel_1 = RefPanel()
+# panel_2 = RefPanel()
+# panel_3 = RefPanel()
+# panel_4 = RefPanel()
+
+class ImportPanel(RefPanel):
+    super().__init__(Button, Text, StatusBar, ContinueButton, Input, Output, ErrorM, drag_file = None)
+    self.drag_file = drag_file
+    if drag_file is None:
+        self.drag_file = []
+    else:
+        self.drag_file.append(drag_file)
+
+
+class Preview_Panel(RefPanel):
+    super().__init__(Button, Text, StatusBar, ContinueButton, Input, Output, ErrorM)
+
+
+
+class Style_Panel(RefPanel):
+    super().__init__(Button, Text, StatusBar, ContinueButton, Input, Output, ErrorM, template = None)
+    if template is None:
+        print('please select a template word document(.docx)')
+    else:
+        self.template = template
+
+
+class GeneratePanel(RefPanel):
+    super().__init__(Button, Text, StatusBar, ContinueButton, Input, Output, ErrorM)
 
 
 
@@ -389,6 +608,7 @@ document.save('test.docx')
 
 #%%
 #TODO: build app functions
+
 """
 Input:
 import csv from publication tracker
@@ -409,7 +629,6 @@ Output:
 Gwnerate
 
 """
-
 
 
 #%%
@@ -435,4 +654,6 @@ selected_technology_option = input('selected from the list')
 # Generate filtered dataframe
 selected_filter = ( journal_df['Status'] == selected_status_option & journal_df['Technology'] == selected_technology_option )
 selected_df = journal_df[selected_filter]
+#%%
 
+# %%

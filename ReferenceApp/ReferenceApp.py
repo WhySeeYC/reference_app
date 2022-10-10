@@ -510,6 +510,7 @@ class Publication:
         self.disease = disease
 
     @fullinfo.deleter # and deleter
+
     def fullinfo(self):
         print('Delete the info!')
         self.status = None

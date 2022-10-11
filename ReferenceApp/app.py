@@ -19,17 +19,16 @@ class MyFrame(wx.Frame):
     def __init__(self, parent, title, size, pos):
         super().__init__(parent = parent, title = title, size = size, pos = pos)
         self.CreateStatusBar() # add statusbuar in the bottom of the window
+        self.InitPanels()
     
-        
         # setting up the menu
         filemenu = wx.Menu()
-
+        
         # wx.ID_ABOUT and wx.ID_EXT are standard IDs provided by wxWidgets
         menuAbout = filemenu.Append(wx.ID_ABOUT, '&About', 'This app is designed to support Perspectum Publication List generation. Click to read the description.')
         menuExit = filemenu.Append(wx.ID_EXIT, 'E&xit', 'Terminate the programme')
         menuFile = filemenu.Append(wx.ID_OPEN, 'Open file', 'Import the input file')
-
-
+        
         # Creating the menubar
         menuBar = wx.MenuBar()
         menuBar.Append(filemenu, '&File') # adding the "filemenu" to the menuBar
@@ -39,32 +38,20 @@ class MyFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OnAbout, menuAbout) # call OnAbout class method
         self.Bind(wx.EVT_MENU, self.OnExit, menuExit) # call OnExit class method
         self.Bind(wx.EVT_MENU, self.OnOpen, menuFile) # call OnExit class method
+    
 
-
-        # Add panels
-        ImportPanel = wx.Panel(parent = self)
-        self.titleText = wx.StaticText(parent = ImportPanel, id = wx.ID_ANY, label = 'Start from importing', pos = (10, 10)) # ID_ANY means that we don't care about the id    
-
-        
-        PreviewPanel = wx.Panel(parent = self)
-        self.titleText = wx.StaticText(parent = PreviewPanel, id = wx.ID_ANY, label = 'Preview Studies', pos = (10, 10)) # ID_ANY means that we don't care about the id    
-
-        
-        StylePanel = wx.Panel(parent = self)
-        self.titleText = wx.StaticText(parent = StylePanel, id = wx.ID_ANY, label = 'Select a template for styling', pos = (10, 10)) # ID_ANY means that we don't care about the id    
-
-
-
-        GeneratePanel = wx.Panel(parent = self)
-        self.titleText = wx.StaticText(parent = GeneratePanel, id = wx.ID_ANY, label = 'Generating output file', pos = (10, 10)) # ID_ANY means that we don't care about the id    
-        
+    def InitPanels(self):
+        Panel_1 = ImportPanel(self)
+        Panel_2 = PreviewPanel(self)
+        Panel_3 = StylePanel(self)
+        Panel_4 = GeneratePanel(self)
 
         # Use sizer to layout
         self.sizer = wx.BoxSizer(wx.HORIZONTAL)
-        self.sizer.Add(ImportPanel, 1, wx.ALIGN_CENTER) # the 2nd argument is a weight factor which means that this control will be sized in proportion to other ones. 0 means that the sizer will not grow. 
-        self.sizer.Add(PreviewPanel, 1, wx.ALIGN_CENTER) # the wx.EXPAND means the panel will be resized when necessary.
-        self.sizer.Add(StylePanel, 1, wx.ALIGN_CENTER) # wx.ALIGN_CENTER align both vertically and horizontally
-        self.sizer.Add(GeneratePanel, 1, wx.ALIGN_CENTER)
+        self.sizer.Add(Panel_1, 1, wx.ALIGN_TOP) # the 2nd argument is a weight factor which means that this control will be sized in proportion to other ones. 0 means that the sizer will not grow. 
+        self.sizer.Add(Panel_2, 1, wx.ALIGN_TOP) # the wx.EXPAND means the panel will be resized when necessary.
+        self.sizer.Add(Panel_3, 1, wx.ALIGN_TOP) # wx.ALIGN_CENTER align both vertically and horizontally
+        self.sizer.Add(Panel_4, 1, wx.ALIGN_TOP)
 
         # Layout sizer
         self.SetSizer(self.sizer)
@@ -73,7 +60,7 @@ class MyFrame(wx.Frame):
         self.Show()
 
         
-#TODO: 10 Oct: continuw with  Validators in docs: https://wiki.wxpython.org/Getting%20Started
+
 
     def OnAbout(self, event):
         dlg = wx.MessageDialog(self, 
@@ -95,11 +82,57 @@ class MyFrame(wx.Frame):
             self.filename = dlg.GetFilename()
             self.dirname = dlg.GetDirectory()
             f = open(os.path.join(self.dirname, self.filename), 'r')
-            self.controlSetValue(f.read())
+            self.control.SetValue(f.read())
             f.close()
         dlg.Destroy()
 
 
+
+# Add panels
+class ImportPanel(wx.Panel):
+    def __init__(self, parent):
+        super().__init__(parent = parent)
+        titleText = wx.StaticText(parent = self, id = wx.ID_ANY, label = 'Start from importing', pos = (10, 10)) # ID_ANY means that we don't care about the id 
+        filebutton = wx.Button(parent = self, id = wx.ID_FILE, label = 'Import Publication Trkcker', pos = (10, 30))
+        self.Bind(wx.EVT_BUTTON, self.importFile, filebutton)
+    
+
+    def importFile(self,event):
+        self.dirname = ''
+        dlg = wx.FileDialog(self, 'Import a file', self.dirname, '', '*.*', wx.FD_OPEN)
+        if dlg.ShowModal() == wx.ID_OK: # "Modal" means that the user cannot do anything on the application until he clicks OK or Cancel.
+            self.filename = dlg.GetFilename()
+            self.dirname = dlg.GetDirectory()
+            f_name = os.path.join(self.dirname, self.filename)
+            pd.read_excel(f_name, sheet_name = 0, header=0)
+            print('File imported')
+    #TODO: 11 Oct: continuw with Adding a few more controls in docs: https://wiki.wxpython.org/Getting%20Started     
+    #TODO: see how to bind event to status bar
+
+
+
+class PreviewPanel(wx.Panel):
+    def __init__(self, parent):
+        super().__init__(parent = parent)
+        titleText = wx.StaticText(parent = self, id = wx.ID_ANY, label = 'Preview Studies', pos = (10, 10)) # ID_ANY means that we don't care about the id    
+
+
+class StylePanel(wx.Panel):
+    def __init__(self, parent):
+        super().__init__(parent = parent)
+        titleText = wx.StaticText(parent = self, id = wx.ID_ANY, label = 'Select a template for styling', pos = (10, 10)) # ID_ANY means that we don't care about the id
+        styleFile = wx.Button(parent = self, id = wx.ID_FILE, label = 'Import Publication Trkcker', pos = (10, 30))
+        # self.Bind(wx.EVT_BUTTON, self.OnOpen, styleFile)
+        # self.addNameDate = wx.TextCtrl(StylePanel, id = wx.ID_ANY, size = (300, 200), pos = (10, 50))
+
+
+
+class GeneratePanel(wx.Panel):
+    def __init__(self, parent):
+        super().__init__(parent = parent)
+        GeneratePanel = wx.Panel(parent = self)
+        titleText = wx.StaticText(parent = self, id = wx.ID_ANY, label = 'Generating output file', pos = (10, 10)) # ID_ANY means that we don't care about the id    
+        
 
 if __name__ == "__main__":
     app = MyApp()

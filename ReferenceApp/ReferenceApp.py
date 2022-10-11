@@ -14,13 +14,11 @@
 # Import Relevant libraries
 from textwrap import indent
 import pandas as pd # this library organises data frame 
-import openpyxl # this library open excel file
 import requests 
 from bs4 import BeautifulSoup as bs
 import lxml
 import json
 import docx # this package get text form word document
-import re
 from docx import Document
 from docx.shared import RGBColor
 from docx.shared import Cm

@@ -18,7 +18,7 @@ class MyApp(wx.App):
 class MyFrame(wx.Frame):
     def __init__(self, parent, title, size, pos):
         super().__init__(parent = parent, title = title, size = size, pos = pos)
-        self.CreateStatusBar() # add statusbuar in the bottom of the window
+        self.CreateStatusBar(1) # add statusbuar in the bottom of the window, the (1) means we only giving one statusbar item
         self.InitPanels()
     
         # setting up the menu
@@ -93,21 +93,38 @@ class ImportPanel(wx.Panel):
     def __init__(self, parent):
         super().__init__(parent = parent)
         titleText = wx.StaticText(parent = self, id = wx.ID_ANY, label = 'Start from importing', pos = (10, 10)) # ID_ANY means that we don't care about the id 
-        filebutton = wx.Button(parent = self, id = wx.ID_FILE, label = 'Import Publication Trkcker', pos = (10, 30))
+        filebutton = wx.Button(parent = self, id = wx.ID_FILE, label = 'Import Publication Tracker', pos = (10, 30))
         self.Bind(wx.EVT_BUTTON, self.importFile, filebutton)
-    
 
-    def importFile(self,event):
+        self.logger = wx.TextCtrl(self, pos = (10, 40), size = (200, 300), style = wx.TE_MULTILINE | wx.TE_READONLY)
+
+        # Create radio button
+        self.status_list = [ ] # ------> continue to use here
+        # TODO: how to use the output from method as the input for button widget
+        status_rb = wx.RadioBox(self, label = 'select the status of the study to include in the output.', pos = (10, 70), choices = self.status_list , majorDimension = 3, style = wx.RA_SPECIFY_COLS)
+        self.Bind(event = wx.EVT_RADIOBOX, handler = self.EvtRadioBox, source = status_rb)
+
+
+    def importFile(self, event):
         self.dirname = ''
         dlg = wx.FileDialog(self, 'Import a file', self.dirname, '', '*.*', wx.FD_OPEN)
         if dlg.ShowModal() == wx.ID_OK: # "Modal" means that the user cannot do anything on the application until he clicks OK or Cancel.
             self.filename = dlg.GetFilename()
             self.dirname = dlg.GetDirectory()
             f_name = os.path.join(self.dirname, self.filename)
-            pd.read_excel(f_name, sheet_name = 0, header=0)
-            print('File imported')
+            journal_df = pd.read_excel(f_name, sheet_name = 0, header=0)
+            # print(journal_df.head())
+            self.GetParent().SetStatusText('File imported') # the status bar is only at frame level so Get.Parent() will go up 1 level
+            self.status_list = journal_df['Status'].str.strip().str.lower().unique().tolist()
+            return self.status_list #  <------ use the output from this list 
+        
+             
+    
+    def EvtRadioBox(self, event):
+        self.logger.AppendText('EvtRadioBox: %d\n' % event.GetInt())
+
     #TODO: 11 Oct: continuw with Adding a few more controls in docs: https://wiki.wxpython.org/Getting%20Started     
-    #TODO: see how to bind event to status bar
+
 
 
 

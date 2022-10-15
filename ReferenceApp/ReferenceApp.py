@@ -642,6 +642,9 @@ status_question = [
 ]
 # select status filter
 selected_status_option = inquirer.prompt(status_question)
+journal_df['StatusSelect'] = journal_df['Status'].str.strip().str.lower()
+status_list =journal_df['StatusSelect'].unique().tolist()
+
 
 
 

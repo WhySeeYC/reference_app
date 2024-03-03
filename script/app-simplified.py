@@ -4,7 +4,7 @@ import wx
 import pandas as pd
 
 app = wx.App()
-frame = wx.Frame(parent = None, id = wx.ID_ANY, title = 'Perspectum Publication Generator', size = (1000, 500), pos = (100, 100))
+frame = wx.Frame(parent = None, id = wx.ID_ANY, title = 'Publication Generator', size = (1000, 500), pos = (100, 100))
 frame.CreateStatusBar(1)
 
 

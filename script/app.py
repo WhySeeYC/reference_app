@@ -10,7 +10,7 @@ class MyApp(wx.App):
         self.InitFrame() # initiate a frame
 
     def InitFrame(self):
-        frame = MyFrame(parent=None, title = 'Perspectum Publication Generator', size = (1000, 500), pos = (100, 100))
+        frame = MyFrame(parent=None, title = 'Publication Generator', size = (1000, 500), pos = (100, 100))
         frame.Show()
         
 
@@ -25,7 +25,7 @@ class MyFrame(wx.Frame):
         filemenu = wx.Menu()
         
         # wx.ID_ABOUT and wx.ID_EXT are standard IDs provided by wxWidgets
-        menuAbout = filemenu.Append(wx.ID_ABOUT, '&About', 'This app is designed to support Perspectum Publication List generation. Click to read the description.')
+        menuAbout = filemenu.Append(wx.ID_ABOUT, '&About', 'This app is designed to support Publication List generation. Click to read the description.')
         menuExit = filemenu.Append(wx.ID_EXIT, 'E&xit', 'Terminate the programme')
         menuFile = filemenu.Append(wx.ID_OPEN, 'Open file', 'Import the input file')
         
@@ -72,7 +72,7 @@ class MyFrame(wx.Frame):
 
     def OnAbout(self, event):
         dlg = wx.MessageDialog(self, 
-                                'This app is designed to support Perspectum Publication List generation. An overview of the workflow will be to import the "Publication Tracker" which includes the summary for each study. Then select the output style template (which is a .docx file).  Finally, the output is written into a Word document for final editing. Please feel free to contact the designer of this app for help.', 
+                                'This app is designed to support Publication List generation. An overview of the workflow will be to import the "Publication Tracker" which includes the summary for each study. Then select the output style template (which is a .docx file).  Finally, the output is written into a Word document for final editing. Please feel free to contact the designer of this app for help.', 
                                 'Publication List Generator', 
                                 wx.OK)
         dlg.ShowModal() # show the dialogue box

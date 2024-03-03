@@ -33,19 +33,19 @@ pd.set_option('display.width', 1000)
 
 # %%
 # read in excel list of publications, store as journal data frame and abstract data frame
-journal_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name = 0, header=0)
+journal_df = pd.read_excel('/Users//OneDrive - Ltd/Work_Repo/ReferenceApp/Publications Tracker.xlsx', sheet_name = 0, header=0)
 
 
 
 # %% 
-abstract_df = pd.read_excel('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications Tracker.xlsx', sheet_name=1, header=0)
+abstract_df = pd.read_excel('/Users//OneDrive - Ltd/Work_Repo/ReferenceApp/Publications Tracker.xlsx', sheet_name=1, header=0)
 
 
 
 
 #%%
 # Add the summary paragrph into publication tracker.
-word_master = docx.Document('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications List Master - LATEST.docx')
+word_master = docx.Document('/Users//OneDrive - Ltd/Work_Repo/ReferenceApp/Publications List Master - LATEST.docx')
 all_paragraphs = word_master.paragraphs
 
 try:
@@ -76,7 +76,7 @@ def get_docx_text(path):
 
     return '\n\n'.join(paragraphs)
 
-para_list = get_docx_text('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Perspectum Publications List Master - LATEST.docx').split('\n\n')
+para_list = get_docx_text('/Users//OneDrive - Ltd/Work_Repo/ReferenceApp/Publications List Master - LATEST.docx').split('\n\n')
 
 for para in para_list:
     if para.startswith('http'):
@@ -254,7 +254,7 @@ def summary_style(modify):
 #Sorting descending from dataframe did not work -> sorting to be controled by input file
 
 
-document = Document(docx = '/Users/yi-chunwang/Work_Repo/ReferenceApp/Publication Template.docx')
+document = Document(docx = '/Users//Work_Repo/ReferenceApp/Publication Template.docx')
 style = document.styles 
 
 section = document.sections[0]
@@ -267,7 +267,7 @@ section.left_margin, section.right_margin, section.top_margin, section.bottom_ma
 # logo_run = paragraph.add_run()
 # # logo_path = input('Please choose a Logo path:')
 # # logo_run.add_picture(logo_path, width=Cm(6))
-# logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) # 
+# logo_run.add_picture('/Users//OneDrive - Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) # 
 
 # allow user to put in document title -> this will also be controled with template
 # heading = input('Type in the document title:')
@@ -319,13 +319,13 @@ from docx.shared import RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH # import the python-docx property setting WD_ALIGN_PARAGRAPH
 from docx.enum.style import WD_STYLE_TYPE
 
-document = docx.Document(docx = '/Users/yi-chunwang/Work_Repo/ReferenceApp/Publication Template.docx') # use template
+document = docx.Document(docx = '/Users//Work_Repo/ReferenceApp/Publication Template.docx') # use template
 style = document.styles 
 # lstyle = styles.add_style('List Number', WD_STYLE_TYPE.PARAGRAPH, builtin=True)
 """
 To access the style in the template:
 from docx.enum.style import WD_STYLE_TYPE
-document = docx.Document(docx = '/Users/yi-chunwang/Work_Repo/ReferenceApp/Publication Template.docx') # use template
+document = docx.Document(docx = '/Users//Work_Repo/ReferenceApp/Publication Template.docx') # use template
 styles = document.styles
 paragraph_styles = [s for s in styles if s.type == WD_STYLE_TYPE.PARAGRAPH]
 for style in paragraph_styles:
@@ -337,7 +337,7 @@ for style in paragraph_styles:
 # paragraph = header.paragraphs[0]
 # paragraph.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 # logo_run = paragraph.add_run()
-# logo = logo_run.add_picture('/Users/yi-chunwang/OneDrive - Perspectum Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) 
+# logo = logo_run.add_picture('/Users//OneDrive - Ltd/Work_Repo/ReferenceApp/Logo Perspectum_RGB_NoTM.png', width=Cm(6)) 
 
 # footer = section.footer
 # paragraph = footer.paragraphs[0]

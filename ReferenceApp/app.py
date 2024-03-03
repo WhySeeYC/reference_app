@@ -175,8 +175,9 @@ class ImportPanel(wx.Panel):
         
         # Use sizer to layout
         self.sizer = wx.BoxSizer(wx.HORIZONTAL)
-        self.sizer.Add(status_rb, 1, wx.ALIGN_TOP) # the wx.EXPAND means the panel will be resized when necessary.
-        self.sizer.Add(technology_rb, 1, wx.ALIGN_TOP) # wx.ALIGN_CENTER align both vertically and horizontally
+        self.sizer.Add(self.sizer2, 1, wx.ALIGN_TOP)
+        self.sizer.Add(status_rb, 1, wx.ALIGN_TOP) 
+        self.sizer.Add(technology_rb, 1, wx.ALIGN_TOP)
         self.sizer.Add(disease_rb, 1, wx.ALIGN_TOP)
 
         # Layout sizer
